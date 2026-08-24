@@ -133,10 +133,7 @@ export default function HomePage() {
       <section className="bg-canvas border-b border-hairline pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
         <Container size="default">
           <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-income-bg text-income border border-income-border text-xs font-semibold uppercase tracking-wider mb-6 font-mono">
-              <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Modern Financial Management SaaS</span>
-            </div>
+          
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink tracking-tight leading-[1.1] mb-6">
               Simple expense tracking for{" "}

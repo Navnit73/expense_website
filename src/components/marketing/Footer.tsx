@@ -19,10 +19,7 @@ const FOOTER_COLUMNS = [
     title: "Resources",
     links: [
       { name: "Financial Guide Hub", href: "/guide" },
-      { name: "Personal Expense Tracking", href: "/guide/personal-expense-tracking" },
-      { name: "Household Bill Tracker", href: "/guide/recurring-expenses" },
-      { name: "Self-Employed Expenses", href: "/guide/how-to-track-business-expenses" },
-      { name: "Investment Tracking", href: "/guide/investment-tracking" },
+
     ],
   },
   {
