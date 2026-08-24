@@ -19,9 +19,9 @@ const FOOTER_COLUMNS = [
     title: "Resources",
     links: [
       { name: "Financial Guide Hub", href: "/guide" },
-      { name: "Expense Tracking Guide", href: "/guide/expense-tracking" },
-      { name: "Small Business Expenses", href: "/guide/small-business-expense-tracking" },
-      { name: "Personal Budgeting", href: "/guide/personal-expense-tracking" },
+      { name: "Personal Expense Tracking", href: "/guide/personal-expense-tracking" },
+      { name: "Household Bill Tracker", href: "/guide/recurring-expenses" },
+      { name: "Self-Employed Expenses", href: "/guide/how-to-track-business-expenses" },
       { name: "Investment Tracking", href: "/guide/investment-tracking" },
     ],
   },
@@ -70,9 +70,9 @@ export function Footer() {
             </Link>
 
             <p className="text-sm text-ink-muted leading-relaxed max-w-sm">
-              Simple expense tracking and financial management for individuals and small
-              businesses. Monitor income, expenses, investments, and algorithmic insights with zero
-              complexity.
+              Personal expense tracking and household financial management for individuals,
+              working professionals, and the self-employed. Track income, expenses, investments,
+              and bills with zero complexity.
             </p>
 
             <div className="flex items-center gap-4 text-xs text-ink-muted pt-2">

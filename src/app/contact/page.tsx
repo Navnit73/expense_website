@@ -20,10 +20,7 @@ export const metadata: Metadata = createPageMetadata({
     "Get in touch with the Expenseliy team for support inquiries, feature requests, account assistance, or billing questions.",
   path: "/contact",
   keywords: [
-    "contact expenseliy",
-    "expenseliy support",
-    "expense tracker help",
-    "financial software customer service",
+   
   ],
 });
 

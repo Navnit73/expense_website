@@ -7,7 +7,7 @@ import { Badge } from "@/components/marketing/Badge";
 import { PricingCard, PricingPlan } from "@/components/marketing/PricingCard";
 import { FAQAccordion, FAQItem } from "@/components/marketing/FAQAccordion";
 import { CTASection } from "@/components/marketing/CTASection";
-import { createPageMetadata, getSoftwareAppSchema } from "@/lib/seo";
+import { createPageMetadata, getSoftwareAppSchema, getFAQSchema } from "@/lib/seo";
 import { Check, Minus } from "lucide-react";
 
 export const metadata: Metadata = createPageMetadata({
@@ -20,7 +20,7 @@ export const metadata: Metadata = createPageMetadata({
     "free expense tracker",
     "pro expense tracker",
     "affordable personal finance software",
-    "small business expense tracking cost",
+    "household bill tracker cost",
   ],
 });
 
@@ -51,7 +51,7 @@ const PRICING_PLANS: PricingPlan[] = [
     price: "$15",
     period: "/ month",
     description:
-      "Full financial capabilities for active individuals, solopreneurs, and small businesses.",
+      "Full financial capabilities for active individuals, working professionals, and the self-employed.",
     features: [
       "Unlimited transactions",
       "Advanced multi-asset tracking (Investments)",
@@ -134,6 +134,7 @@ const COMPARISON_TABLE = [
 
 export default function PricingPage() {
   const schema = getSoftwareAppSchema();
+  const faqSchema = getFAQSchema(PRICING_FAQS);
 
   return (
     <div className="flex flex-col flex-1">
@@ -141,6 +142,10 @@ export default function PricingPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* Header */}

@@ -15,9 +15,9 @@ keywords:
 image: "/og-image.png"
 ---
 
-The subscription economy has made recurring billing the default business model for everything from enterprise software to gym memberships and entertainment streaming.
+The subscription economy has made recurring billing the default model for everything from household utilities and streaming services to professional software tools.
 
-The average consumer pays for 4.2 subscriptions they have completely forgotten about, wasting an estimated $420 to $960 annually. For businesses, unmonitored SaaS seats cost thousands.
+The average consumer pays for 4.2 subscriptions they have completely forgotten about, wasting an estimated $420 to $960 annually. For households and freelancers, unmonitored recurring subscriptions can silently drain thousands from your savings.
 
 ---
 

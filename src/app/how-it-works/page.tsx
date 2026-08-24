@@ -24,7 +24,7 @@ export const metadata: Metadata = createPageMetadata({
     "how to track expenses",
     "expense tracking workflow",
     "personal finance setup",
-    "small business expense workflow",
+    "household bill workflow",
     "financial management steps",
   ],
 });

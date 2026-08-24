@@ -18,17 +18,9 @@ import {
 export const metadata: Metadata = createPageMetadata({
   title: "Financial Guides & Expense Tracking Knowledge Hub",
   description:
-    "Explore comprehensive, step-by-step guides on expense tracking, personal budgeting, small business cash flow management, tax deductions, and investment tracking.",
+    "Explore comprehensive, step-by-step guides on personal expense tracking, household budgeting, self-employed tax deductions, and investment tracking.",
   path: "/guide",
-  keywords: [
-    "expense tracking guide",
-    "personal finance guide",
-    "small business expense guide",
-    "budgeting best practices",
-    "financial management tutorials",
-    "track business expenses",
-    "investment tracking guide",
-  ],
+  keywords: [],
 });
 
 export default function GuideIndexPage() {
@@ -49,9 +41,9 @@ export default function GuideIndexPage() {
     },
     {
       icon: Briefcase,
-      name: "Business Finance",
-      desc: "Tax write-offs, contractor costs & small business runway.",
-      count: guides.filter((g) => g.category === "Business Finance").length,
+      name: "Self-Employed & Tax",
+      desc: "Tax write-offs, contractor costs & deductible receipts.",
+      count: guides.filter((g) => g.category.includes("Business") || g.category.includes("Tax") || g.category.includes("Self-Employed")).length,
     },
     {
       icon: Layers,

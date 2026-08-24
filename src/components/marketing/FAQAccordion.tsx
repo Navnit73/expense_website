@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { getFAQSchema } from "@/lib/seo";
 
 export interface FAQItem {
   question: string;
@@ -12,13 +11,11 @@ export interface FAQItem {
 
 interface FAQAccordionProps {
   items: FAQItem[];
-  includeSchema?: boolean;
   className?: string;
 }
 
 export function FAQAccordion({
   items,
-  includeSchema = true,
   className = "",
 }: FAQAccordionProps) {
   const [openIndices, setOpenIndices] = useState<number[]>([0]);
@@ -29,16 +26,8 @@ export function FAQAccordion({
     );
   };
 
-  const schema = includeSchema ? getFAQSchema(items) : null;
-
   return (
     <div className={`flex flex-col gap-3 w-full ${className}`}>
-      {schema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      )}
       {items.map((item, index) => {
         const isOpen = openIndices.includes(index);
         const buttonId = `faq-question-${index}`;

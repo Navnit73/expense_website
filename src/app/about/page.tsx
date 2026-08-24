@@ -15,13 +15,10 @@ import {
 export const metadata: Metadata = createPageMetadata({
   title: "About Expenseliy — Mission & Product Philosophy",
   description:
-    "Learn about Expenseliy's mission to provide fast, privacy-conscious expense and financial tracking for individuals and small businesses without accounting complexity.",
+    "Learn about Expenseliy's mission to provide fast, privacy-conscious expense and financial tracking for individuals and without accounting complexity.",
   path: "/about",
   keywords: [
-    "about expenseliy",
-    "expense tracking mission",
-    "financial management philosophy",
-    "simple expense tracker",
+   
   ],
 });
 
@@ -61,7 +58,7 @@ export default function AboutPage() {
                   The Problem We Solve
                 </h2>
                 <p className="text-sm sm:text-base text-ink-secondary leading-relaxed mb-4">
-                  For most individuals, freelancers, and small business operators, existing
+                  For most individuals, working professionals, and the self-employed, existing
                   financial management tools fall into two frustrating extremes:
                 </p>
                 <ul className="space-y-3 text-sm sm:text-base text-ink-secondary mb-4">
@@ -93,24 +90,24 @@ export default function AboutPage() {
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-canvas border border-hairline rounded-md p-4">
-                    <h3 className="font-bold text-sm text-ink mb-1">Individuals & Families</h3>
+                    <h3 className="font-bold text-sm text-ink mb-1">Working Professionals</h3>
                     <p className="text-xs text-ink-muted leading-relaxed">
                       Track everyday spending, optimize monthly savings rates, and eliminate zombie
                       subscriptions.
                     </p>
                   </div>
                   <div className="bg-canvas border border-hairline rounded-md p-4">
-                    <h3 className="font-bold text-sm text-ink mb-1">Freelancers & Solopreneurs</h3>
+                    <h3 className="font-bold text-sm text-ink mb-1">Self-Employed & Freelancers</h3>
                     <p className="text-xs text-ink-muted leading-relaxed">
-                      Track multiple variable income streams, categorize deductible business costs,
-                      and export clean CSVs for tax filing.
+                      Track variable client income, categorize tax-deductible expenses,
+                      and export clean CSVs for accountant filing.
                     </p>
                   </div>
                   <div className="bg-canvas border border-hairline rounded-md p-4">
-                    <h3 className="font-bold text-sm text-ink mb-1">Agencies & Small Teams</h3>
+                    <h3 className="font-bold text-sm text-ink mb-1">Household Bill Trackers</h3>
                     <p className="text-xs text-ink-muted leading-relaxed">
-                      Tag expenses by client or project, generate printable expense summaries, and
-                      monitor operating burn rate.
+                      Audit recurring utilities, subscriptions, rent/mortgage, and shared family living
+                      costs with automated recurring detection.
                     </p>
                   </div>
                   <div className="bg-canvas border border-hairline rounded-md p-4">

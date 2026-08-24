@@ -39,7 +39,7 @@ Here is the recommended standard taxonomy for personal and business finances.
 
 ---
 
-## Recommended Small Business Expense Categories
+## Recommended Self-Employed & Freelance Expense Categories
 
 | Category | Inclusions & Scope |
 | :--- | :--- |

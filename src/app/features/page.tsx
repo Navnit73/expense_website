@@ -4,7 +4,8 @@ import { Breadcrumbs } from "@/components/marketing/Breadcrumbs";
 import { Badge } from "@/components/marketing/Badge";
 import { Button } from "@/components/marketing/Button";
 import { CTASection } from "@/components/marketing/CTASection";
-import { createPageMetadata } from "@/lib/seo";
+import { FAQAccordion, FAQItem } from "@/components/marketing/FAQAccordion";
+import { createPageMetadata, getSoftwareAppSchema, getFAQSchema } from "@/lib/seo";
 import {
   Receipt,
   TrendingUp,
@@ -18,7 +19,6 @@ import {
   RefreshCw,
   CalendarRange,
   BrainCircuit,
-  Sparkles,
   AlertTriangle,
   TrendingDown,
   Download,
@@ -27,6 +27,7 @@ import {
   Moon,
   Trash2,
   ArrowRight,
+  HelpCircle,
 } from "lucide-react";
 
 export const metadata: Metadata = createPageMetadata({
@@ -35,14 +36,7 @@ export const metadata: Metadata = createPageMetadata({
     "Explore Expenseliy's full feature suite: multi-asset tracking (expenses, income, investments), AI financial insights, recurring expense detection, CSV exports, and privacy-first data isolation.",
   path: "/features",
   keywords: [
-    "expense tracking features",
-    "income tracker software",
-    "investment portfolio tracking",
-    "financial health score",
-    "recurring expense detector",
-    "ai financial insights",
-    "csv expense export",
-    "multi-currency expense tracker",
+  
   ],
 });
 
@@ -73,7 +67,7 @@ const FEATURE_GROUPS = [
         icon: FolderPlus,
         title: "Custom Category Management",
         description:
-          "Create, rename, and organize custom categories with tailored color badges to match your personal budgeting framework or business chart of accounts.",
+          "Create, rename, and organize custom categories with tailored color badges to match your personal budgeting framework, household bills, or self-employed categories.",
       },
     ],
   },
@@ -101,101 +95,191 @@ const FEATURE_GROUPS = [
       },
       {
         icon: LineChart,
-        title: "Investment Growth & Allocation",
+        title: "Month-over-Month Variance",
         description:
-          "Monitor how much monthly cash surplus is successfully converted into wealth-building asset classes.",
+          "Track sequential spending and earning trends across historical months to understand seasonality and cash flow drift.",
       },
       {
         icon: HeartPulse,
         title: "Financial Health Score",
         description:
-          "Algorithmic score benchmarking your cash reserve buffer, savings rate percentage, and fixed-to-variable spending ratio.",
+          "An objective algorithmic rating evaluating your cash flow surplus, savings rate consistency, and expense stability.",
       },
+      {
+        icon: CalendarRange,
+        title: "Savings Rate Calculation",
+        description:
+          "Automatic real-time formula calculating the exact percentage of income retained after all operating and living expenses.",
+      },
+    ],
+  },
+  {
+    category: "Automation, AI & Smart Detection",
+    description: "Algorithmic tools designed to audit subscriptions, detect cost anomalies, and generate insights.",
+    items: [
       {
         icon: RefreshCw,
         title: "Recurring Expense Detection",
         description:
-          "Automated pattern engine detects 30-day and annual subscription charges to highlight duplicate services or silent price creeps.",
+          "Identifies repeating subscriptions, memberships, utilities, and software licenses, calculating total annual recurring overhead.",
       },
-      {
-        icon: CalendarRange,
-        title: "Month-over-Month Analysis",
-        description:
-          "Compare current spend against historical 3-month, 6-month, and 12-month rolling baselines to detect anomalous spikes.",
-      },
-    ],
-  },
-  {
-    category: "AI Financial Insights & Forecasting",
-    description: "Smart algorithmic summaries and anomaly warnings without invasive data sharing.",
-    items: [
       {
         icon: BrainCircuit,
-        title: "AI Financial Overview",
+        title: "AI Financial Insights",
         description:
-          "Synthesizes complex monthly transaction trends into clear, plain-English executive summaries.",
-      },
-      {
-        icon: Sparkles,
-        title: "AI Budget Recommendations",
-        description:
-          "Identifies discretionary cost-saving opportunities based on your category spending distributions.",
+          "Context-aware informational analysis highlighting spending velocity, cost anomalies, and discretionary versus essential ratios.",
       },
       {
         icon: AlertTriangle,
-        title: "AI Anomaly Detection",
+        title: "Spending Anomaly Alerts",
         description:
-          "Alerts you immediately when a category spend deviates significantly from your typical historical baseline.",
+          "Flags transactions that deviate significantly from category rolling averages to prevent unnoticed billing errors.",
       },
       {
         icon: TrendingDown,
-        title: "Financial Forecasting",
+        title: "Discretionary Spending Ratio",
         description:
-          "Projects estimated month-end cash flow and savings surplus based on current burn rate and recurring schedules.",
+          "Separates essential non-negotiable living costs from discretionary lifestyle spending for structured budgeting.",
       },
     ],
   },
   {
-    category: "Exports, Privacy & Platform",
-    description: "Full data portability, international support, and total privacy control.",
+    category: "Data Portability, Security & Experience",
+    description: "Complete user ownership of financial records with zero third-party monetization.",
     items: [
       {
         icon: Download,
-        title: "One-Click CSV Export",
+        title: "Instant CSV Ledger Exports",
         description:
-          "Export your full itemized transaction ledger anytime for spreadsheets, CPA tax filing, or backup archives.",
+          "Export your un-truncated transaction history to standard CSV at any time for Excel, Google Sheets, or tax filing software.",
       },
       {
         icon: Printer,
         title: "Printable Financial Reports",
         description:
-          "Generate clean, formatted, print-ready expense reports ideal for client billing and business reimbursement.",
+          "Generate clean, formatted printable ledger summaries ready for accountant review, audits, or offline record archives.",
       },
       {
         icon: Globe2,
-        title: "Multi-Currency Management",
+        title: "Multi-Currency Tagging",
         description:
-          "Tag domestic and international transactions across global currencies (USD, GBP, EUR, AUD, CAD, etc.).",
+          "Record transactions in USD, EUR, GBP, CAD, AUD, and other global currencies with clean denomination tags.",
       },
       {
         icon: Moon,
-        title: "Built-In Dark Mode",
+        title: "True Dark Mode",
         description:
-          "Carefully calibrated high-contrast dark theme engineered for comfortable low-light financial tracking.",
+          "Engineered with high-contrast, low-glare surface tokens for seamless visibility in low-light environments.",
       },
       {
         icon: Trash2,
-        title: "Permanent Account Deletion",
+        title: "Complete Self-Serve Data Deletion",
         description:
-          "Complete self-serve GDPR-oriented deletion option in user settings to instantly wipe all records upon request.",
+          "Permanent, instant database erasure of your profile, ledger, categories, and analytics on demand with zero lock-in.",
       },
     ],
   },
 ];
 
+const FEATURES_FAQS: FAQItem[] = [
+  {
+    question: "What features does Expenseliy offer?",
+    answer:
+      "Expenseliy provides a complete financial tracking suite for individuals, working professionals, the self-employed, and household bill tracking. Key features include multi-asset transaction tracking (Expenses, Income, Investments), custom category management, automated Month-over-Month analytics, an algorithmic Financial Health Score, recurring subscription detection, AI-assisted financial summaries, one-click CSV ledger exports, printable financial statements, multi-currency support, dark mode, and complete self-serve data deletion.",
+  },
+  {
+    question: "Can I track expenses, income, and investments with Expenseliy?",
+    answer:
+      "Yes. Expenseliy natively supports three core transaction types in a unified ledger: Expenses (daily purchases, utilities, household bills, self-employed costs), Income (salaries, freelance invoices, dividends, rental cash flow), and Investments (stocks, ETFs, crypto, real estate, precious metals).",
+  },
+  {
+    question: "Can I categorize and organize my personal expenses?",
+    answer:
+      "Yes. You can assign transactions to default categories or create custom categories with distinct color tags. You can also add custom notes, merchant details, payment methods, and receipt tags to keep your records thoroughly organized.",
+  },
+  {
+    question: "Can I search and filter my transactions?",
+    answer:
+      "Yes. Expenseliy includes real-time search and multi-parameter filtering. You can instantly filter transactions by date range, asset type (Expense, Income, Investment), category, payment method, or keyword search across notes and payees.",
+  },
+  {
+    question: "Does Expenseliy provide spending and budget analytics?",
+    answer:
+      "Yes. Expenseliy generates interactive charts that visualize your net cash flow, income vs. expenses, category distribution breakdowns, and Month-over-Month spending variance to identify trends over time.",
+  },
+  {
+    question: "Can Expenseliy identify my biggest spending categories?",
+    answer:
+      "Yes. The analytics dashboard automatically calculates category distribution percentages and highlights your top cost drivers, allowing you to see exactly where the largest portions of your income are directed.",
+  },
+  {
+    question: "Can I track my savings rate and financial health?",
+    answer:
+      "Yes. Expenseliy continuously calculates your real monthly savings rate ((Income - Expenses) / Income * 100) and evaluates your financial health based on cash flow stability, savings discipline, and expense consistency.",
+  },
+  {
+    question: "Does Expenseliy detect recurring expenses and subscriptions?",
+    answer:
+      "Yes. Expenseliy features an algorithmic Recurring Expense Detector that monitors transaction frequency and merchant patterns to identify recurring software subscriptions, memberships, and utility bills, alerting you to price increases.",
+  },
+  {
+    question: "Can Expenseliy analyze my finances with AI?",
+    answer:
+      "Yes. Expenseliy Pro includes AI-driven financial insights that analyze historical spending patterns to generate concise, objective monthly summaries, flag spending anomalies, and suggest potential cost-reduction opportunities.",
+  },
+  {
+    question: "What can Expenseliy AI financial insights tell me?",
+    answer:
+      "Expenseliy AI provides structured summaries of your monthly cash flow, highlights unusual category spikes compared to your rolling averages, calculates discretionary vs. essential spending ratios, and provides informational observations to assist your budgeting decisions.",
+  },
+  {
+    question: "Can I export my expenses and financial data?",
+    answer:
+      "Yes. You can download an un-truncated, clean CSV export of your entire transaction history with a single click at any time for tax filing, accounting software import, or offline backup in Excel or Google Sheets.",
+  },
+  {
+    question: "Does Expenseliy support multiple currencies?",
+    answer:
+      "Yes. Expenseliy supports major international currencies including USD, GBP, EUR, CAD, AUD, and others, allowing you to record both local and foreign currency transactions with clear currency identifiers.",
+  },
+  {
+    question: "Can I create custom expense and income categories?",
+    answer:
+      "Yes. You can create an unlimited number of custom categories with tailored names and color badges to match your specific household budget, personal goals, or self-employed categories.",
+  },
+  {
+    question: "Can I generate printable financial reports?",
+    answer:
+      "Yes. Expenseliy Pro allows you to generate clean, printer-friendly summary reports and transaction ledgers suitable for offline filing, accountant reviews, or loan documentation.",
+  },
+  {
+    question: "Does Expenseliy support dark mode?",
+    answer:
+      "Yes. Expenseliy features a native, high-contrast dark mode designed to reduce eye strain, complete with automatic system preference detection and an instant manual theme toggle.",
+  },
+  {
+    question: "Can I delete my Expenseliy account and financial data?",
+    answer:
+      "Yes. We practice strict data privacy and isolation. Expenseliy provides a self-serve account deletion option in your settings that permanently erases your profile, ledger, categories, and analytics from the database.",
+  },
+];
+
 export default function FeaturesPage() {
+  const appSchema = getSoftwareAppSchema();
+  const faqSchema = getFAQSchema(FEATURES_FAQS);
+
   return (
     <div className="flex flex-col flex-1">
+      {/* Schema Injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* Header */}
       <header className="bg-surface border-b border-hairline py-12 sm:py-16">
         <Container size="default">
@@ -266,8 +350,29 @@ export default function FeaturesPage() {
         ))}
       </div>
 
+      {/* Frequently Asked Questions Section */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-surface border-t border-hairline">
+        <Container size="narrow">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <Badge variant="income" size="sm" className="mb-3">
+              <HelpCircle className="w-3.5 h-3.5 mr-1" />
+              <span>Features FAQ</span>
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-ink tracking-tight mb-4">
+              Frequently Asked Questions About Expenseliy Features
+            </h2>
+            <p className="text-sm sm:text-base text-ink-secondary leading-relaxed">
+              Everything you need to know about our multi-asset tracking, AI analytics, export tools,
+              and security capabilities.
+            </p>
+          </div>
+
+          <FAQAccordion items={FEATURES_FAQS} />
+        </Container>
+      </section>
+
       {/* Disclaimer */}
-      <div className="bg-surface border-y border-hairline py-6 text-center text-xs text-ink-muted">
+      <div className="bg-canvas border-t border-hairline py-6 text-center text-xs text-ink-muted">
         <Container size="narrow">
           <p>
             <strong>Note on AI & Algorithmic Features:</strong> Expenseliy AI analysis, health

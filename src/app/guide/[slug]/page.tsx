@@ -250,9 +250,9 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                     About {guide.author}
                   </h3>
                   <p className="text-xs text-ink-secondary leading-relaxed mt-1">
-                    Our team of software engineers, financial analysts, and small business operators
-                    publishes practical, research-backed guides on personal cash flow, expense
-                    audits, tax readiness, and investment tracking.
+                    Our team of software engineers, financial analysts, and personal finance specialists
+                    publishes practical, research-backed guides on personal cash flow, household
+                    bill audits, self-employed tax readiness, and investment tracking.
                   </p>
                 </div>
               </div>
@@ -373,8 +373,8 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                       <span className="font-bold text-xs text-ink">Expenseliy SaaS</span>
                     </div>
                     <p className="text-[11px] text-ink-muted leading-relaxed mb-3">
-                      Simple expense tracking & cash flow analysis for individuals and small
-                      businesses.
+                      Personal expense tracking & household bill management for individuals,
+                      working professionals, and the self-employed.
                     </p>
                     <Button
                       href="https://app.expenseliy.com/signup"

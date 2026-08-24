@@ -4,9 +4,9 @@ export const SITE_CONFIG = {
   name: "Expenseliy",
   domain: "expenseliy.com",
   url: "https://expenseliy.com",
-  title: "Expenseliy — Simple Expense Tracking & Financial Management",
+  title: "Expenseliy — Personal Expense & Household Bill Tracker",
   description:
-    "Expenseliy is a modern expense tracking and financial management platform for individuals and small businesses. Track expenses, income, investments, and algorithmic insights with zero complexity.",
+    "Expenseliy is a modern expense tracking and financial management platform for individuals, working professionals, self-employed, and household bill tracking. Track expenses, income, investments, and algorithmic insights with zero complexity.",
   ogImage: "https://expenseliy.com/opengraph-image",
   twitterHandle: "@expenseliy",
   authors: [{ name: "Expenseliy Team", url: "https://expenseliy.com/about" }],
@@ -40,16 +40,7 @@ export function createPageMetadata({
   publishedTime,
   modifiedTime,
   keywords = [
-    "expense tracker",
-    "expense tracking",
-    "personal expense tracker",
-    "small business expense tracker",
-    "financial management software",
-    "income and expense tracker",
-    "investment tracker",
-    "spending tracker",
-    "financial insights",
-    "cash flow tracker",
+    
   ],
   authors,
 }: MetadataProps): Metadata {
@@ -143,9 +134,9 @@ export function getOrganizationSchema() {
     logo: `${SITE_CONFIG.url}/logo.svg`,
     description: SITE_CONFIG.description,
     knowsAbout: [
-      "Expense Tracking",
-      "Financial Management",
-      "Small Business Bookkeeping",
+      "Personal Expense Tracking",
+      "Household Bill Tracking",
+      "Self-Employed Expense Management",
       "Cash Flow Analytics",
       "Investment Portfolio Tracking",
     ],
@@ -178,7 +169,7 @@ export function getSoftwareAppSchema() {
     softwareVersion: "1.0.0",
     url: SITE_CONFIG.url,
     description:
-      "Expense tracking and financial management web application for individuals and small businesses.",
+      "Personal expense tracking and household bill management web application for individuals, working professionals, and the self-employed.",
     featureList: [
       "Multi-asset transaction ledger (Expenses, Income, Investments)",
       "Automated category distribution & Month-over-Month variance",

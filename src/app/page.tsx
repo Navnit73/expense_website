@@ -30,50 +30,76 @@ import {
   getOrganizationSchema,
   getWebsiteSchema,
   getSoftwareAppSchema,
+  getFAQSchema,
 } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Simple Expense Tracking & Financial Management",
   description:
-    "Expenseliy provides clean, structured expense, income, and investment tracking for individuals and small businesses with algorithmic insights and zero complexity.",
+    "Expenseliy provides clean, structured expense, income, and investment tracking for individuals and with algorithmic insights and zero complexity.",
   path: "/",
 });
 
 const HOMEPAGE_FAQS: FAQItem[] = [
   {
-    question: "What is Expenseliy?",
+    question: "What is the best personal expense tracker for managing everyday spending?",
     answer:
-      "Expenseliy is a modern expense tracking and financial management web application built for individuals, freelancers, and small businesses. It enables you to record expenses, track multiple income streams, monitor investment holdings, and receive algorithmic financial health insights without complicated accounting bloat.",
+      "The best personal expense tracker is one that minimizes logging friction while providing instant visibility into your cash flow. Expenseliy is built specifically for speed and clarity—allowing you to log daily purchases in under 5 seconds with custom categories, payment method tags, and real-time category distribution charts, all with zero invasive third-party bank linking requirements.",
   },
   {
-    question: "Is Expenseliy free to use?",
+    question: "How does a personal finance tracker help you manage your money?",
     answer:
-      "Yes. Expenseliy offers a 100% Free plan that includes 40 lifetime transactions, complete dashboard analytics, custom category management, basic financial health scoring, and CSV data exports.",
+      "A personal finance tracker converts scattered bank and card statements into a structured, unified ledger. By categorizing income, fixed needs, discretionary wants, and investments, Expenseliy automatically calculates your real monthly savings rate, detects unexpected cost spikes, and highlights exactly where your cash flow goes before month-end.",
   },
   {
-    question: "What does the Pro subscription include?",
+    question: "What is the best way to track personal expenses?",
     answer:
-      "Expenseliy Pro provides unlimited lifetime transactions, higher AI insight quotas for deep anomaly detection and category forecasting, priority customer support, and advanced printable report generators for $15/month or $99/year ($8.25/month effective).",
+      "The best way to track personal expenses is through consistent, immediate recording paired with standardized high-level categories. Rather than sorting through hundreds of receipts at the end of the year, logging transactions daily in Expenseliy with tags (e.g. #groceries, #fixed, #dining) keeps your records clean, audit-ready, and effortlessly organized.",
   },
   {
-    question: "Can I track income and investments in addition to expenses?",
+    question: "What is the best app for budgeting and tracking expenses?",
     answer:
-      "Yes. Expenseliy is built around three core transaction types: Expenses, Income (salary, freelance, dividends, rental cash flow), and Investments (stocks, mutual funds, ETFs, cryptocurrency, gold, and real estate).",
+      "For individuals, working professionals, and the self-employed who prefer speed, privacy, and actionable analytics over clunky spreadsheets, Expenseliy offers the ideal balance. It combines clean transaction ledgers with automated Month-over-Month variance analysis, Financial Health Scores, and AI-driven spending summaries.",
   },
   {
-    question: "Can I export my financial data?",
+    question: "Is there a free personal expense tracker I can use online?",
     answer:
-      "Yes. You can export your entire transaction ledger to CSV at any time for your accountant, tax filing software, or personal spreadsheets.",
+      "Yes. Expenseliy provides a 100% Free tier that includes 40 lifetime transactions, complete dashboard analytics, custom category management, basic financial health scoring, and full CSV exports with no credit card required.",
   },
   {
-    question: "Does Expenseliy provide financial advice?",
+    question: "Can I track income and expenses in the same app?",
     answer:
-      "No. Expenseliy provides record-keeping, algorithmic metrics, and AI-assisted summaries for informational and organizational purposes only. They do not constitute certified financial, tax, or legal advice.",
+      "Yes. Expenseliy natively tracks both income (salary, freelance retainers, dividends, rental cash flow) and expenses in the same unified ledger, calculating your net cash flow and real-time savings surplus automatically.",
   },
   {
-    question: "Can I delete my account and data?",
+    question: "What is the best way to track household expenses?",
     answer:
-      "Yes. Expenseliy provides a self-serve account deletion option in user settings that permanently purges your user profile, transactions, categories, and analytics from the database.",
+      "To track household expenses effectively, group your costs into essential fixed utilities (rent/mortgage, electricity, water, internet) and variable living expenses (groceries, home maintenance). Expenseliy allows you to tag household bills with custom labels, monitor category spending trends, and split expenses across multiple household members or projects.",
+  },
+  {
+    question: "Can Expenseliy track recurring bills and household expenses?",
+    answer:
+      "Yes. Expenseliy features an algorithmic Recurring Expense Detector that identifies monthly and annual subscription patterns (such as streaming services, utilities, and software tools), alerting you to silent price increases and duplicate services.",
+  },
+  {
+    question: "Can I use Expenseliy instead of an Excel expense tracker?",
+    answer:
+      "Yes. While Excel and Google Sheets require manual formulas, pivot tables, and mobile formatting workarounds, Expenseliy automates your charts, calculations, category distributions, and health scores right out of the box. Plus, you can export your entire ledger to Excel-compatible CSV anytime.",
+  },
+  {
+    question: "Can I track investments as well as expenses?",
+    answer:
+      "Yes. Expenseliy includes dedicated Investment Tracking for stocks, mutual funds, ETFs, cryptocurrency, precious metals, and real estate, giving you a 360-degree view of your net assets alongside everyday operational cash flow.",
+  },
+  {
+    question: "Does Expenseliy support multiple currencies?",
+    answer:
+      "Yes. Expenseliy supports global currencies (including USD, GBP, EUR, CAD, AUD, and more), allowing you to tag domestic and international purchases with appropriate currency identifiers.",
+  },
+  {
+    question: "Can I export my personal financial data?",
+    answer:
+      "Yes. You have complete ownership of your financial records. You can download an un-truncated, machine-readable CSV export of your entire transaction history with a single click at any time for tax preparation or offline backup.",
   },
 ];
 
@@ -81,6 +107,7 @@ export default function HomePage() {
   const orgSchema = getOrganizationSchema();
   const webSiteSchema = getWebsiteSchema();
   const appSchema = getSoftwareAppSchema();
+  const faqSchema = getFAQSchema(HOMEPAGE_FAQS);
 
   return (
     <div className="flex flex-col flex-1">
@@ -96,6 +123,10 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* Hero Section */}
@@ -115,7 +146,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base sm:text-lg text-ink-secondary leading-relaxed max-w-2xl mb-8">
-              Expenseliy gives individuals and small businesses clear control over income,
+              Expenseliy gives individuals and households to clear control over income,
               expenses, investments, and spending patterns with instant analytics and algorithmic
               insights.
             </p>
@@ -503,7 +534,7 @@ export default function HomePage() {
       {/* Bottom CTA */}
       <CTASection
         title="Start Tracking Your Expenses with Complete Clarity"
-        description="Join individuals and small businesses making informed financial choices with Expenseliy."
+        description="Join individuals and making informed financial choices with Expenseliy."
         badgeText="Get Started Free"
       />
     </div>
