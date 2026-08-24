@@ -9,7 +9,7 @@ import {
   getRelatedGuides,
 } from "@/lib/guide";
 import { extractHeadings, markdownToHtml } from "@/lib/markdown";
-import { createPageMetadata, getArticleSchema } from "@/lib/seo";
+import { createPageMetadata, getArticleSchema, getBreadcrumbSchema } from "@/lib/seo";
 import { Container } from "@/components/marketing/Container";
 import { Breadcrumbs } from "@/components/marketing/Breadcrumbs";
 import { Badge } from "@/components/marketing/Badge";
@@ -88,13 +88,22 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
     updatedAt: guide.updatedAt,
     author: guide.author,
   });
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Guide", url: "/guide" },
+    { name: guide.title, url: `/guide/${guide.slug}` },
+  ]);
 
   return (
     <div className="flex flex-col flex-1">
-      {/* Inject Article JSON-LD Structured Data */}
+      {/* Inject Article & Breadcrumb JSON-LD Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       {/* Header / Meta Section */}

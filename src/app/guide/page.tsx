@@ -6,7 +6,7 @@ import { GuideCard } from "@/components/marketing/GuideCard";
 import { GuideCatalog } from "@/components/marketing/GuideCatalog";
 import { CTASection } from "@/components/marketing/CTASection";
 import { getAllGuides, getAllCategories } from "@/lib/guide";
-import { createPageMetadata } from "@/lib/seo";
+import { createPageMetadata, getBreadcrumbSchema } from "@/lib/seo";
 import {
   BookOpen,
   Receipt,
@@ -20,12 +20,19 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Explore comprehensive, step-by-step guides on personal expense tracking, household budgeting, self-employed tax deductions, and investment tracking.",
   path: "/guide",
-  keywords: [],
+  keywords: [
+    
+  ],
 });
 
 export default function GuideIndexPage() {
   const guides = getAllGuides();
   const categories = getAllCategories();
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Guide", url: "/guide" },
+  ]);
 
   // Pick the premier featured guide (e.g. 'expense-tracking')
   const featuredGuide =
@@ -63,6 +70,12 @@ export default function GuideIndexPage() {
 
   return (
     <div className="flex flex-col flex-1">
+      {/* Inject Breadcrumb JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Editorial Header */}
       <header className="bg-surface border-b border-hairline py-12 sm:py-16">
         <Container size="default">

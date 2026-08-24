@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 
 export const SITE_CONFIG = {
   name: "Expenseliy",
-  domain: "expenseliy.com",
-  url: "https://expenseliy.com",
+  domain: "www.expenseliy.com",
+  url: "https://www.expenseliy.com",
   title: "Expenseliy — Personal Expense & Household Bill Tracker",
   description:
     "Expenseliy is a modern expense tracking and financial management platform for individuals, working professionals, self-employed, and household bill tracking. Track expenses, income, investments, and algorithmic insights with zero complexity.",
-  ogImage: "https://expenseliy.com/opengraph-image",
+  ogImage: "https://www.expenseliy.com/opengraph-image",
   twitterHandle: "@expenseliy",
-  authors: [{ name: "Expenseliy Team", url: "https://expenseliy.com/about" }],
+  authors: [{ name: "Expenseliy Team", url: "https://www.expenseliy.com/about" }],
   creator: "Expenseliy",
   publisher: "Expenseliy",
   legalEntity: "Expenseliy Technologies Inc.",

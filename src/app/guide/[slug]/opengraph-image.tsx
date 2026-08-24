@@ -111,7 +111,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             color: "#8daaa0",
           }}
         >
-          <div style={{ display: "flex" }}>Expenseliy Knowledge Hub — expenseliy.com/guide</div>
+          <div style={{ display: "flex" }}>Expenseliy Knowledge Hub — www.expenseliy.com/guide</div>
           <div style={{ display: "flex", color: "#00D27B", fontWeight: 600 }}>Read full guide →</div>
         </div>
       </div>
