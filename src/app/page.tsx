@@ -10,8 +10,6 @@ import {
   Download,
   Globe2,
   Trash2,
-  CheckCircle2,
-  Sparkles,
   ShieldCheck,
   Zap,
   BarChart3,
@@ -36,7 +34,7 @@ import {
 export const metadata: Metadata = createPageMetadata({
   title: "Simple Expense Tracking & Financial Management",
   description:
-    "Expenseliy provides clean, structured expense, income, and investment tracking for individuals and with algorithmic insights and zero complexity.",
+    "Expenseliy provides clean, structured expense, income, and investment tracking for individuals and households with algorithmic insights and zero complexity.",
   path: "/",
 });
 
@@ -143,14 +141,14 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base sm:text-lg text-ink-secondary leading-relaxed max-w-2xl mb-8">
-              Expenseliy gives individuals and households to clear control over income,
+              Expenseliy gives individuals and households clear control over income,
               expenses, investments, and spending patterns with instant analytics and algorithmic
               insights.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
               <Button
-                href="https://app.expenseliy.com/signup"
+                href="https://app.expenseliy.com/auth/signin"
                 variant="primary"
                 size="lg"
                 className="w-full sm:w-auto"
@@ -170,20 +168,7 @@ export default function HomePage() {
               </Button>
             </div>
 
-            <div className="flex items-center gap-6 mt-8 text-xs text-ink-muted">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
-                <span>40 free transactions</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
-                <span>No credit card required</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
-                <span>Zero box shadows</span>
-              </div>
-            </div>
+
           </div>
 
           {/* Product Preview Mockup */}
@@ -531,7 +516,7 @@ export default function HomePage() {
       {/* Bottom CTA */}
       <CTASection
         title="Start Tracking Your Expenses with Complete Clarity"
-        description="Join individuals and making informed financial choices with Expenseliy."
+        description="Join thousands of individuals and households taking control of their money and making informed financial choices with Expenseliy."
         badgeText="Get Started Free"
       />
     </div>

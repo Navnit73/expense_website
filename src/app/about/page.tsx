@@ -15,11 +15,9 @@ import {
 export const metadata: Metadata = createPageMetadata({
   title: "About Expenseliy — Mission & Product Philosophy",
   description:
-    "Learn about Expenseliy's mission to provide fast, privacy-conscious expense and financial tracking for individuals and without accounting complexity.",
+    "Learn about Expenseliy's mission to provide fast, privacy-conscious expense and financial tracking for individuals and households without accounting complexity.",
   path: "/about",
-  keywords: [
-   
-  ],
+  keywords: [],
 });
 
 export default function AboutPage() {
@@ -198,7 +196,7 @@ export default function AboutPage() {
                   Join users taking control of their cash flow with Expenseliy.
                 </p>
                 <Button
-                  href="https://app.expenseliy.com/signup"
+                  href="https://app.expenseliy.com/auth/signin"
                   variant="primary"
                   size="sm"
                   className="w-full justify-center"

@@ -49,4 +49,4 @@ A complete expense report must provide both executive summary figures and itemiz
 
 ## Generate Instant Financial Reports
 
-Say goodbye to messy spreadsheets. [Generate pristine expense reports and CSV exports with Expenseliy](https://app.expenseliy.com/signup).
+Say goodbye to messy spreadsheets. [Generate pristine expense reports and CSV exports with Expenseliy](https://app.expenseliy.com/auth/signin).

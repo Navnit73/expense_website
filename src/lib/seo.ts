@@ -12,7 +12,7 @@ export const SITE_CONFIG = {
   authors: [{ name: "Expenseliy Team", url: "https://expenseliy.com/about" }],
   creator: "Expenseliy",
   publisher: "Expenseliy",
-  legalEntity: "[Company Legal Name]",
+  legalEntity: "Expenseliy Technologies Inc.",
   contactEmail: "support@expenseliy.com",
   locale: "en_US",
 };

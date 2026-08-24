@@ -5,21 +5,15 @@ import { Sun, Moon } from "lucide-react";
 
 function subscribe(callback: () => void) {
   window.addEventListener("storage", callback);
-  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  mediaQuery.addEventListener("change", callback);
   return () => {
     window.removeEventListener("storage", callback);
-    mediaQuery.removeEventListener("change", callback);
   };
 }
 
 function getSnapshot() {
   if (typeof window === "undefined") return false;
   const stored = localStorage.getItem("expenseliy_theme");
-  if (stored) {
-    return stored === "dark";
-  }
-  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return stored === "dark";
 }
 
 function getServerSnapshot() {

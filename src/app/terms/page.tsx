@@ -84,7 +84,7 @@ export default function TermsOfServicePage() {
               <div className="mt-3 p-4 rounded-md bg-canvas border border-hairline font-mono text-xs text-ink">
                 <p>Email: {SITE_CONFIG.contactEmail}</p>
                 <p>Entity: {SITE_CONFIG.legalEntity}</p>
-                <p>Address: [Business Address Placeholder]</p>
+                <p>Location: San Francisco, CA, United States</p>
               </div>
             </div>
           </div>

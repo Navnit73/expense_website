@@ -42,7 +42,7 @@ const PRICING_PLANS: PricingPlan[] = [
       "Community support",
     ],
     ctaText: "Start Free",
-    ctaHref: "https://app.expenseliy.com/signup",
+    ctaHref: "https://app.expenseliy.com/auth/signin",
     ctaVariant: "secondary",
   },
   {
@@ -63,7 +63,7 @@ const PRICING_PLANS: PricingPlan[] = [
       "Priority customer support",
     ],
     ctaText: "Upgrade to Pro",
-    ctaHref: "https://app.expenseliy.com/signup?plan=pro-monthly",
+    ctaHref: "https://app.expenseliy.com/auth/signin?plan=pro-monthly",
     ctaVariant: "secondary",
   },
   {
@@ -86,7 +86,7 @@ const PRICING_PLANS: PricingPlan[] = [
       "Billed once annually at $99",
     ],
     ctaText: "Get Pro Annual",
-    ctaHref: "https://app.expenseliy.com/signup?plan=pro-annual",
+    ctaHref: "https://app.expenseliy.com/auth/signin?plan=pro-annual",
     ctaVariant: "primary",
   },
 ];

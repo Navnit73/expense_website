@@ -53,8 +53,7 @@ export default function RootLayout({
               (function() {
                 try {
                   var stored = localStorage.getItem('expenseliy_theme');
-                  var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  if (stored === 'dark' || (!stored && supportDark)) {
+                  if (stored === 'dark') {
                     document.documentElement.classList.add('dark');
                   } else {
                     document.documentElement.classList.remove('dark');

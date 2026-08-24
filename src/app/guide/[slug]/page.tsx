@@ -315,7 +315,7 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                   </p>
                 </div>
                 <Button
-                  href="https://app.expenseliy.com/signup"
+                  href="https://app.expenseliy.com/auth/signin"
                   variant="primary"
                   size="md"
                   className="shrink-0 w-full sm:w-auto"
@@ -377,7 +377,7 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                       working professionals, and the self-employed.
                     </p>
                     <Button
-                      href="https://app.expenseliy.com/signup"
+                      href="https://app.expenseliy.com/auth/signin"
                       variant="primary"
                       size="sm"
                       className="w-full justify-center text-xs"

@@ -86,4 +86,4 @@ Perform a quick weekly check-in (5 minutes) to ensure all transactions are logge
 
 ## Take Action with Expenseliy
 
-Ready to eliminate financial clutter? [Start tracking your expenses with Expenseliy](https://app.expenseliy.com/signup) today. Enjoy clean categorizations, multi-currency support, and algorithmic spending insights with 40 free lifetime transactions.
+Ready to eliminate financial clutter? [Start tracking your expenses with Expenseliy](https://app.expenseliy.com/auth/signin) today. Enjoy clean categorizations, multi-currency support, and algorithmic spending insights with 40 free lifetime transactions.

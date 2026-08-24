@@ -80,7 +80,7 @@ export function Navbar() {
               Sign In
             </Button>
             <Button
-              href="https://app.expenseliy.com/signup"
+              href="https://app.expenseliy.com/auth/signin"
               variant="primary"
               size="sm"
               id="navbar-getstarted-btn"
@@ -148,7 +148,7 @@ export function Navbar() {
                 Sign In
               </Button>
               <Button
-                href="https://app.expenseliy.com/signup"
+                href="https://app.expenseliy.com/auth/signin"
                 variant="primary"
                 size="md"
                 className="w-full justify-center"

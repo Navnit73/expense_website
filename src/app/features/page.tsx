@@ -301,7 +301,7 @@ export default function FeaturesPage() {
             </p>
 
             <div className="flex flex-wrap items-center gap-3">
-              <Button href="https://app.expenseliy.com/signup" variant="primary" size="md">
+              <Button href="https://app.expenseliy.com/auth/signin" variant="primary" size="md">
                 <span>Start Free (40 Transactions)</span>
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Button>

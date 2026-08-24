@@ -62,4 +62,4 @@ Here is the recommended standard taxonomy for personal and business finances.
 
 ## Set Up Your Clean Ledger
 
-Expenseliy comes preloaded with standard categories while allowing custom category creation in seconds. [Get started with Expenseliy](https://app.expenseliy.com/signup) today.
+Expenseliy comes preloaded with standard categories while allowing custom category creation in seconds. [Get started with Expenseliy](https://app.expenseliy.com/auth/signin) today.

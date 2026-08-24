@@ -12,7 +12,7 @@ const FOOTER_COLUMNS = [
       { name: "Pricing", href: "/pricing" },
       { name: "How It Works", href: "/how-it-works" },
       { name: "Sign In", href: "https://app.expenseliy.com/login" },
-      { name: "Get Started Free", href: "https://app.expenseliy.com/signup" },
+      { name: "Get Started Free", href: "https://app.expenseliy.com/auth/signin" },
     ],
   },
   {

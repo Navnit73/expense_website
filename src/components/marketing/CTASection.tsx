@@ -18,9 +18,9 @@ interface CTASectionProps {
 
 export function CTASection({
   title = "Take Control of Your Income, Expenses & Investments",
-  description = "Join individuals and who track cash flow, optimize expenses, and gain actionable financial insights with Expenseliy.",
+  description = "Join individuals and households who track cash flow, optimize expenses, and gain actionable financial insights with Expenseliy.",
   primaryCtaText = "Start Tracking Free",
-  primaryCtaHref = "https://app.expenseliy.com/signup",
+  primaryCtaHref = "https://app.expenseliy.com/auth/signin",
   secondaryCtaText = "Explore Pricing Plans",
   secondaryCtaHref = "/pricing",
   badgeText = "Get Started Today",
