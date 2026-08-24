@@ -13,15 +13,18 @@ import { Container } from "@/components/marketing/Container";
 import { Breadcrumbs } from "@/components/marketing/Breadcrumbs";
 import { Badge } from "@/components/marketing/Badge";
 import { GuideCard } from "@/components/marketing/GuideCard";
+import { GuideShare } from "@/components/marketing/GuideShare";
 import { Button } from "@/components/marketing/Button";
 import {
   Calendar,
   Clock,
   User,
   ArrowRight,
+  ArrowLeft,
   ListOrdered,
   Sparkles,
   TrendingUp,
+  BookOpen,
 } from "lucide-react";
 
 interface GuidePageProps {
@@ -68,6 +71,12 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
     notFound();
   }
 
+  const allGuides = getAllGuides();
+  const currentIndex = allGuides.findIndex((g) => g.slug === slug);
+  const previousGuide = currentIndex > 0 ? allGuides[currentIndex - 1] : null;
+  const nextGuide =
+    currentIndex < allGuides.length - 1 ? allGuides[currentIndex + 1] : null;
+
   const headings = extractHeadings(guide.content);
   const htmlContent = markdownToHtml(guide.content);
   const relatedGuides = getRelatedGuides(guide.slug, guide.category, 3);
@@ -99,14 +108,18 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
             className="mb-6"
           />
 
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <Badge variant="sky" size="sm">
-              {guide.category}
-            </Badge>
-            <div className="flex items-center gap-1 text-xs text-ink-muted">
-              <Clock className="w-3.5 h-3.5 text-ink-faint" aria-hidden="true" />
-              <span>{guide.readingTime}</span>
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div className="flex items-center gap-2">
+              <Badge variant="income" size="sm">
+                {guide.category}
+              </Badge>
+              <div className="flex items-center gap-1.5 text-xs text-ink-muted font-mono">
+                <Clock className="w-3.5 h-3.5 text-ink-faint" aria-hidden="true" />
+                <span>{guide.readingTime}</span>
+              </div>
             </div>
+
+            <GuideShare title={guide.title} url={`/guide/${guide.slug}`} />
           </div>
 
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-ink tracking-tight leading-tight mb-4">
@@ -118,14 +131,17 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
           </p>
 
           <div className="pt-4 border-t border-hairline flex flex-wrap items-center justify-between gap-4 text-xs text-ink-muted">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md bg-income-bg text-income border border-income-border flex items-center justify-center font-bold text-[10px]">
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-md bg-income-bg text-income border border-income-border flex items-center justify-center font-bold text-xs">
                 <User className="w-3.5 h-3.5" aria-hidden="true" />
               </div>
-              <span className="font-medium text-ink">{guide.author}</span>
+              <div>
+                <span className="font-semibold text-ink block">{guide.author}</span>
+                <span className="text-[11px] text-ink-muted">Verified Financial Content</span>
+              </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 text-xs">
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5 text-ink-faint" aria-hidden="true" />
                 <span>
@@ -140,7 +156,7 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                 </span>
               </div>
               {guide.updatedAt !== guide.publishedAt && (
-                <span>
+                <span className="hidden sm:inline">
                   Updated:{" "}
                   <time dateTime={guide.updatedAt}>
                     {new Date(guide.updatedAt).toLocaleDateString("en-US", {
@@ -162,23 +178,35 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             {/* Main Article Body */}
             <article className="lg:col-span-8 flex flex-col">
-              {/* Table of Contents (Mobile & Tablet) */}
+              {/* Key Takeaways / TL;DR Box */}
+              <div className="bg-surface-raised border border-hairline-strong rounded-md p-5 sm:p-6 mb-8">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-primary mb-2">
+                  <Sparkles className="w-4 h-4" aria-hidden="true" />
+                  <span>Key Summary & Takeaways</span>
+                </div>
+                <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
+                  {guide.description} Learn the practical steps, avoid common pitfalls, and
+                  utilize Expenseliy to streamline your financial records.
+                </p>
+              </div>
+
+              {/* Mobile Table of Contents */}
               {headings.length > 0 && (
                 <div className="lg:hidden bg-surface border border-hairline rounded-md p-5 mb-8">
-                  <div className="flex items-center gap-2 font-semibold text-ink text-sm uppercase tracking-wider mb-3 font-mono">
+                  <div className="flex items-center gap-2 font-semibold text-ink text-xs uppercase tracking-wider mb-3 font-mono">
                     <ListOrdered className="w-4 h-4 text-primary" aria-hidden="true" />
                     <span>Table of Contents</span>
                   </div>
-                  <nav aria-label="Table of Contents">
-                    <ul className="flex flex-col gap-2 text-sm">
+                  <nav aria-label="Mobile Table of Contents">
+                    <ul className="flex flex-col gap-2 text-xs text-ink-secondary">
                       {headings.map((h) => (
                         <li
                           key={h.id}
-                          className={h.level === 3 ? "pl-4 text-xs" : "font-medium"}
+                          className={h.level === 3 ? "pl-3 text-[11px]" : "font-medium"}
                         >
                           <a
                             href={`#${h.id}`}
-                            className="text-ink-secondary hover:text-primary transition-colors"
+                            className="hover:text-primary transition-colors block py-0.5"
                           >
                             {h.text}
                           </a>
@@ -195,6 +223,77 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                 dangerouslySetInnerHTML={{ __html: htmlContent }}
               />
 
+              {/* Article Keywords Tag Chips */}
+              {guide.keywords && guide.keywords.length > 0 && (
+                <div className="bg-surface border border-hairline rounded-md p-4 sm:p-5 mt-6 flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-mono font-semibold text-ink-muted uppercase mr-1">
+                    Related Topics:
+                  </span>
+                  {guide.keywords.map((kw, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2.5 py-1 rounded-md bg-canvas border border-hairline text-xs font-mono text-ink-secondary"
+                    >
+                      #{kw.replace(/\s+/g, "-")}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Author Bio Box */}
+              <div className="bg-surface border border-hairline rounded-md p-6 mt-6 flex items-start gap-4">
+                <div className="w-10 h-10 rounded-md bg-primary text-white flex items-center justify-center font-bold text-sm shrink-0">
+                  <BookOpen className="w-5 h-5" aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-ink">
+                    About {guide.author}
+                  </h3>
+                  <p className="text-xs text-ink-secondary leading-relaxed mt-1">
+                    Our team of software engineers, financial analysts, and small business operators
+                    publishes practical, research-backed guides on personal cash flow, expense
+                    audits, tax readiness, and investment tracking.
+                  </p>
+                </div>
+              </div>
+
+              {/* Next / Previous Article Navigation */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                {previousGuide ? (
+                  <Link
+                    href={`/guide/${previousGuide.slug}`}
+                    className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-4 flex flex-col justify-between transition-colors group"
+                  >
+                    <span className="text-[11px] font-mono text-ink-muted flex items-center gap-1 mb-1">
+                      <ArrowLeft className="w-3 h-3 group-hover:-translate-x-0.5 transition-transform" />
+                      <span>Previous Article</span>
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold text-ink group-hover:text-primary transition-colors line-clamp-2">
+                      {previousGuide.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <div className="hidden sm:block" />
+                )}
+
+                {nextGuide ? (
+                  <Link
+                    href={`/guide/${nextGuide.slug}`}
+                    className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-4 flex flex-col justify-between items-end text-right transition-colors group"
+                  >
+                    <span className="text-[11px] font-mono text-ink-muted flex items-center gap-1 mb-1">
+                      <span>Next Article</span>
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold text-ink group-hover:text-primary transition-colors line-clamp-2">
+                      {nextGuide.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <div className="hidden sm:block" />
+                )}
+              </div>
+
               {/* Mid/Post-Article Product Callout Banner */}
               <div className="bg-surface-raised border border-hairline-strong rounded-md p-6 sm:p-8 mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                 <div className="flex flex-col gap-1.5">
@@ -203,12 +302,12 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                       <TrendingUp className="w-3.5 h-3.5" aria-hidden="true" />
                     </div>
                     <span className="font-bold text-ink text-base">
-                      Ready to apply this with Expenseliy?
+                      Put this into practice with Expenseliy
                     </span>
                   </div>
                   <p className="text-xs sm:text-sm text-ink-secondary max-w-md">
-                    Track expenses, income, and investments in a fast, clean interface with 40
-                    free lifetime transactions.
+                    Track your expenses, categorize income, and monitor investment assets in a fast,
+                    clean interface with 40 free lifetime transactions.
                   </p>
                 </div>
                 <Button
@@ -224,37 +323,45 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
               </div>
             </article>
 
-            {/* Sidebar (Desktop) */}
+            {/* Sticky Sidebar (Desktop) */}
             <aside className="hidden lg:block lg:col-span-4 space-y-6">
-              {/* Sticky Table of Contents */}
               {headings.length > 0 && (
-                <div className="sticky top-24 bg-surface border border-hairline rounded-md p-5">
-                  <div className="flex items-center gap-2 font-semibold text-ink text-xs uppercase tracking-wider mb-4 font-mono">
-                    <ListOrdered className="w-4 h-4 text-primary" aria-hidden="true" />
-                    <span>In this Article</span>
-                  </div>
-                  <nav aria-label="Desktop Table of Contents">
-                    <ul className="flex flex-col gap-2.5 text-xs text-ink-secondary">
-                      {headings.map((h) => (
-                        <li
-                          key={h.id}
-                          className={h.level === 3 ? "pl-3 text-[11px]" : "font-medium"}
-                        >
-                          <a
-                            href={`#${h.id}`}
-                            className="hover:text-primary transition-colors block py-0.5"
+                <div className="sticky top-24 bg-surface border border-hairline rounded-md p-5 space-y-6">
+                  <div>
+                    <div className="flex items-center gap-2 font-semibold text-ink text-xs uppercase tracking-wider mb-3 font-mono">
+                      <ListOrdered className="w-4 h-4 text-primary" aria-hidden="true" />
+                      <span>Table of Contents</span>
+                    </div>
+                    <nav aria-label="Desktop Table of Contents">
+                      <ul className="flex flex-col gap-2 text-xs text-ink-secondary max-h-[45vh] overflow-y-auto pr-2 scrollbar-thin">
+                        {headings.map((h) => (
+                          <li
+                            key={h.id}
+                            className={h.level === 3 ? "pl-3 text-[11px]" : "font-medium"}
                           >
-                            {h.text}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
+                            <a
+                              href={`#${h.id}`}
+                              className="hover:text-primary transition-colors block py-0.5 text-ink-secondary hover:text-ink"
+                            >
+                              {h.text}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </nav>
+                  </div>
+
+                  {/* Sidebar Share */}
+                  <div className="pt-4 border-t border-hairline">
+                    <GuideShare title={guide.title} url={`/guide/${guide.slug}`} />
+                  </div>
 
                   {/* Mini Product Card in Sidebar */}
-                  <div className="mt-6 pt-6 border-t border-hairline">
+                  <div className="pt-4 border-t border-hairline">
                     <div className="flex items-center gap-2 mb-2">
-                      <Sparkles className="w-4 h-4 text-primary" aria-hidden="true" />
+                      <div className="w-5 h-5 rounded bg-primary text-white flex items-center justify-center">
+                        <TrendingUp className="w-3 h-3" />
+                      </div>
                       <span className="font-bold text-xs text-ink">Expenseliy SaaS</span>
                     </div>
                     <p className="text-[11px] text-ink-muted leading-relaxed mb-3">
