@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   title: "Expenseliy — Simple Expense Tracking & Financial Management",
   description:
     "Expenseliy is a modern expense tracking and financial management platform for individuals and small businesses. Track expenses, income, investments, and algorithmic insights with zero complexity.",
-  ogImage: "https://expenseliy.com/og-image.png",
+  ogImage: "https://expenseliy.com/opengraph-image",
   twitterHandle: "@expenseliy",
   authors: [{ name: "Expenseliy Team", url: "https://expenseliy.com/about" }],
   creator: "Expenseliy",
@@ -68,6 +68,10 @@ export function createPageMetadata({
       canonical: canonicalUrl,
       languages: {
         en: canonicalUrl,
+        "en-US": canonicalUrl,
+        "en-GB": canonicalUrl,
+        "en-CA": canonicalUrl,
+        "en-AU": canonicalUrl,
         "x-default": canonicalUrl,
       },
     },
@@ -118,7 +122,6 @@ export function createPageMetadata({
     icons: {
       icon: "/favicon.ico",
       shortcut: "/favicon.ico",
-      apple: "/apple-touch-icon.png",
     },
   };
 }
@@ -135,7 +138,13 @@ export function getOrganizationSchema() {
     url: SITE_CONFIG.url,
     logo: `${SITE_CONFIG.url}/logo.png`,
     description: SITE_CONFIG.description,
-    sameAs: [],
+    knowsAbout: [
+      "Expense Tracking",
+      "Financial Management",
+      "Small Business Bookkeeping",
+      "Cash Flow Analytics",
+      "Investment Portfolio Tracking",
+    ],
     contactPoint: {
       "@type": "ContactPoint",
       email: SITE_CONFIG.contactEmail,
@@ -151,6 +160,7 @@ export function getWebsiteSchema() {
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
     description: SITE_CONFIG.description,
+    inLanguage: "en-US",
   };
 }
 
@@ -159,11 +169,20 @@ export function getSoftwareAppSchema() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: SITE_CONFIG.name,
-    operatingSystem: "Web",
+    operatingSystem: "All (Web Browser)",
     applicationCategory: "FinanceApplication",
+    softwareVersion: "1.0.0",
     url: SITE_CONFIG.url,
     description:
       "Expense tracking and financial management web application for individuals and small businesses.",
+    featureList: [
+      "Multi-asset transaction ledger (Expenses, Income, Investments)",
+      "Automated category distribution & Month-over-Month variance",
+      "Algorithmic Financial Health Score",
+      "Recurring subscription detection",
+      "Instant CSV ledger exports and printable statements",
+      "Multi-currency support and privacy-first data isolation",
+    ],
     offers: [
       {
         "@type": "Offer",
@@ -211,7 +230,7 @@ export function getArticleSchema({
   url,
   publishedAt,
   updatedAt,
-  author = "Expenseliy",
+  author = "Expenseliy Financial Editorial Team",
   image = SITE_CONFIG.ogImage,
 }: {
   title: string;
@@ -227,17 +246,20 @@ export function getArticleSchema({
     "@type": "Article",
     headline: title,
     description,
+    inLanguage: "en-US",
     url: url.startsWith("http") ? url : `${SITE_CONFIG.url}${url}`,
     image: image.startsWith("http") ? image : `${SITE_CONFIG.url}${image}`,
     datePublished: publishedAt,
     dateModified: updatedAt,
     author: {
-      "@type": "Person",
+      "@type": "Organization",
       name: author,
+      url: `${SITE_CONFIG.url}/about`,
     },
     publisher: {
       "@type": "Organization",
       name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
       logo: {
         "@type": "ImageObject",
         url: `${SITE_CONFIG.url}/logo.png`,
