@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { TrendingUp, ShieldCheck, Lock } from "lucide-react";
+import Image from "next/image";
+import { ShieldCheck, Lock } from "lucide-react";
 import { Container } from "./Container";
 
 const FOOTER_COLUMNS = [
@@ -56,9 +57,13 @@ export function Footer() {
               className="flex items-center gap-2.5 font-bold text-lg text-ink hover:text-primary transition-colors w-fit"
               id="footer-brand-logo"
             >
-              <div className="w-7 h-7 rounded-md bg-primary text-white flex items-center justify-center font-extrabold text-sm border border-primary">
-                <TrendingUp className="w-4 h-4 text-white stroke-[2.5]" aria-hidden="true" />
-              </div>
+              <Image
+                src="/logo.svg"
+                alt="Expenseliy Logo"
+                width={28}
+                height={28}
+                className="rounded-md border border-hairline shrink-0"
+              />
               <span className="tracking-tight text-xl font-bold">
                 Expense<span className="text-primary">liy</span>
               </span>

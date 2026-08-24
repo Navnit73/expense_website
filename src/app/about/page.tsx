@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/marketing/Container";
 import { Breadcrumbs } from "@/components/marketing/Breadcrumbs";
 import { Badge } from "@/components/marketing/Badge";
@@ -9,7 +10,6 @@ import {
   ShieldCheck,
   Zap,
   Lock,
-  TrendingUp,
 } from "lucide-react";
 
 export const metadata: Metadata = createPageMetadata({
@@ -188,7 +188,13 @@ export default function AboutPage() {
 
               <div className="bg-surface-raised border border-hairline-strong rounded-md p-6">
                 <div className="flex items-center gap-2 mb-2">
-                  <TrendingUp className="w-4 h-4 text-primary" />
+                  <Image
+                    src="/logo.svg"
+                    alt="Expenseliy Logo"
+                    width={18}
+                    height={18}
+                    className="rounded shrink-0"
+                  />
                   <span className="font-bold text-sm text-ink">Get Started Today</span>
                 </div>
                 <p className="text-xs text-ink-muted mb-4 leading-relaxed">

@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight, TrendingUp } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Container } from "./Container";
 import { Button } from "./Button";
 import { ThemeToggle } from "./ThemeToggle";
@@ -30,9 +31,14 @@ export function Navbar() {
             id="navbar-brand-logo"
             aria-label="Expenseliy Home"
           >
-            <div className="w-8 h-8 rounded-md bg-primary text-white flex items-center justify-center font-extrabold text-base border border-primary">
-              <TrendingUp className="w-4 h-4 text-white stroke-[2.5]" aria-hidden="true" />
-            </div>
+            <Image
+              src="/logo.svg"
+              alt="Expenseliy Logo"
+              width={32}
+              height={32}
+              className="rounded-md border border-hairline shrink-0"
+              priority
+            />
             <span className="tracking-tight text-xl font-bold">
               Expense<span className="text-primary">liy</span>
             </span>
