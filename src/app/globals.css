@@ -1,26 +1,150 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-whitesmoke: #f6f5f4;
+  --brand-mediumseagreen: #00A860;
+  --brand-mediumspringgreen: #00D27B;
+  --brand-seagreen: #00874C;
+  --homepage-mintcream: #EBF5F0;
+  --homepage-black: #121f1b;
+  --homepage-darkseagreen: #4a7c67;
+  --homepage-whitesmoke: #F1ECEF;
+  --homepage-snow: #FDF5F5;
+  --homepage-ghostwhite: #F8FBFF;
+  --canvas: var(--brand-whitesmoke);
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --ink: #111c18;
+  --ink-secondary: #2d3e38;
+  --ink-muted: #526e63;
+  --ink-faint: #8daaa0;
+  --hairline: #e2ede8;
+  --hairline-strong: #c8ded5;
+  --primary: #00874C;
+  --primary-active: #006e3d;
+  --secondary: #00A860;
+  --income: #00874C;
+  --income-bg: #E8F6EF;
+  --income-border: #b8e6d1;
+  --expense: #dc2626;
+  --expense-bg: #fef2f2;
+  --expense-border: #fecaca;
+  --investment: #6d28d9;
+  --investment-bg: #f5f3ff;
+  --investment-border: #ddd6fe;
+  --sky: #0284c7;
+  --sky-bg: #f0f9ff;
+  --sky-border: #bae6fd;
+  --warning: #d97706;
+  --warning-bg: #fffbeb;
+  --warning-border: #fde68a;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+.dark {
+  --canvas: #0e1714;
+  --surface: #15221e;
+  --surface-raised: #1c2d28;
+  --ink: #f4f9f6;
+  --ink-secondary: #d1e4dc;
+  --ink-muted: #8caea0;
+  --ink-faint: #4e6f62;
+  --hairline: #223730;
+  --hairline-strong: #2f4b42;
+  --primary: #00D27B;
+  --primary-active: #00A860;
+  --secondary: #00A860;
+  --income: #00E687;
+  --income-bg: #0d271c;
+  --income-border: #184834;
+  --expense: #fb7185;
+  --expense-bg: #35131b;
+  --expense-border: #5c1e2b;
+  --investment: #a78bfa;
+  --investment-bg: #27173e;
+  --investment-border: #4c2d7b;
+  --sky: #38bdf8;
+  --sky-bg: #0c2a3a;
+  --sky-border: #134e6f;
+  --warning: #fbbf24;
+  --warning-bg: #332403;
+  --warning-border: #5e4308;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-ink: var(--ink);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-primary: var(--primary);
+  --color-primary-active: var(--primary-active);
+  --color-secondary: var(--secondary);
+  --color-income: var(--income);
+  --color-income-bg: var(--income-bg);
+  --color-income-border: var(--income-border);
+  --color-expense: var(--expense);
+  --color-expense-bg: var(--expense-bg);
+  --color-expense-border: var(--expense-border);
+  --color-investment: var(--investment);
+  --color-investment-bg: var(--investment-bg);
+  --color-investment-border: var(--investment-border);
+  --color-sky: var(--sky);
+  --color-sky-bg: var(--sky-bg);
+  --color-sky-border: var(--sky-border);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-border: var(--warning-border);
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accessible focus styles without box-shadow */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: var(--income-border);
+  color: var(--ink);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--canvas);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--hairline-strong);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-faint);
 }
