@@ -72,7 +72,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
             <Button
-              href="https://app.expenseliy.com/login"
+              href="https://app.expenseliy.com/auth/signin"
               variant="ghost"
               size="sm"
               id="navbar-signin-btn"
@@ -139,7 +139,7 @@ export function Navbar() {
             </nav>
             <div className="flex flex-col gap-2 pt-3 border-t border-hairline px-1">
               <Button
-                href="https://app.expenseliy.com/login"
+                href="https://app.expenseliy.com/auth/signin"
                 variant="secondary"
                 size="md"
                 className="w-full justify-center"
