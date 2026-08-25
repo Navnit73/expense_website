@@ -184,7 +184,7 @@ export default function AboutPage() {
               <div className="bg-surface-raised border border-hairline-strong rounded-md p-6">
                 <div className="flex items-center gap-2 mb-2">
                   <Image
-                    src="/logo.svg"
+                    src="/favicon.ico"
                     alt="Expenseliy Logo"
                     width={18}
                     height={18}

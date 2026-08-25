@@ -26,7 +26,7 @@ export default function ErrorPage({ error, reset }: ErrorProps) {
           {/* Brand Mark & 500 Badge */}
           <div className="flex items-center gap-3 mb-6">
             <Image
-              src="/logo.svg"
+              src="/favicon.ico"
               alt="Expenseliy Logo"
               width={36}
               height={36}

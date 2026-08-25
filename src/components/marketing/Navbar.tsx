@@ -32,7 +32,7 @@ export function Navbar() {
             aria-label="Expenseliy Home"
           >
             <Image
-              src="/logo.svg"
+              src="/favicon.ico"
               alt="Expenseliy Logo"
               width={32}
               height={32}

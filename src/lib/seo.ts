@@ -111,12 +111,9 @@ export function createPageMetadata({
       creator: SITE_CONFIG.twitterHandle,
     },
     icons: {
-      icon: [
-        { url: "/favicon.svg", type: "image/svg+xml" },
-        { url: "/icon.svg", type: "image/svg+xml" },
-      ],
-      shortcut: "/favicon.svg",
-      apple: "/apple-icon.svg",
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
+      apple: "/favicon.ico",
     },
   };
 }
@@ -131,7 +128,7 @@ export function getOrganizationSchema() {
     "@type": "Organization",
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/logo.svg`,
+    logo: `${SITE_CONFIG.url}/favicon.ico`,
     description: SITE_CONFIG.description,
     knowsAbout: [
       "Personal Expense Tracking",
@@ -257,7 +254,7 @@ export function getArticleSchema({
       url: SITE_CONFIG.url,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_CONFIG.url}/logo.svg`,
+        url: `${SITE_CONFIG.url}/favicon.ico`,
       },
     },
     mainEntityOfPage: {

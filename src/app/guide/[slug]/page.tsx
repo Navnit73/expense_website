@@ -308,7 +308,7 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                 <div className="flex flex-col gap-1.5">
                   <div className="flex items-center gap-2">
                     <Image
-                      src="/logo.svg"
+                      src="/favicon.ico"
                       alt="Expenseliy Logo"
                       width={24}
                       height={24}
@@ -373,7 +373,7 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                   <div className="pt-4 border-t border-hairline">
                     <div className="flex items-center gap-2 mb-2">
                       <Image
-                        src="/logo.svg"
+                        src="/favicon.ico"
                         alt="Expenseliy Logo"
                         width={20}
                         height={20}

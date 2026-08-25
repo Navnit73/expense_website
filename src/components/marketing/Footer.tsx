@@ -55,7 +55,7 @@ export function Footer() {
               id="footer-brand-logo"
             >
               <Image
-                src="/logo.svg"
+                src="/favicon.ico"
                 alt="Expenseliy Logo"
                 width={28}
                 height={28}
