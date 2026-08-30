@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   ArrowRight,
   TrendingUp,
@@ -14,6 +15,11 @@ import {
   Zap,
   BarChart3,
   Layers,
+  Calculator,
+  Sparkles,
+  PieChart,
+  RefreshCw,
+  CheckCircle2,
 } from "lucide-react";
 import { Container } from "@/components/marketing/Container";
 import { Section } from "@/components/marketing/Section";
@@ -32,9 +38,9 @@ import {
 } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Simple Expense Tracking & Financial Management",
+  title: "Simple Expense Tracking & Financial Management (Free Online 2026)",
   description:
-    "Expenseliy provides clean, structured expense, income, and investment tracking for individuals and households with algorithmic insights and zero complexity.",
+    "Expenseliy provides clean, structured expense, income, and investment tracking for individuals, freelancers, and households with algorithmic insights and zero bank sync complexity.",
   path: "/",
 });
 
@@ -50,14 +56,19 @@ const HOMEPAGE_FAQS: FAQItem[] = [
       "A personal finance tracker converts scattered bank and card statements into a structured, unified ledger. By categorizing income, fixed needs, discretionary wants, and investments, Expenseliy automatically calculates your real monthly savings rate, detects unexpected cost spikes, and highlights exactly where your cash flow goes before month-end.",
   },
   {
-    question: "What is the best way to track personal expenses?",
+    question: "How can I track expenses without linking my bank account?",
     answer:
-      "The best way to track personal expenses is through consistent, immediate recording paired with standardized high-level categories. Rather than sorting through hundreds of receipts at the end of the year, logging transactions daily in Expenseliy with tags (e.g. #groceries, #fixed, #dining) keeps your records clean, audit-ready, and effortlessly organized.",
+      "Expenseliy provides an intentional, privacy-first manual ledger. Instead of dealing with broken Plaid connections or sharing bank logins, you can input expenses in under 5 seconds from desktop or mobile. Your data remains strictly isolated in your private tenant.",
   },
   {
-    question: "What is the best app for budgeting and tracking expenses?",
+    question: "How does the 50/30/20 budget framework work in Expenseliy?",
     answer:
-      "For individuals, working professionals, and the self-employed who prefer speed, privacy, and actionable analytics over clunky spreadsheets, Expenseliy offers the ideal balance. It combines clean transaction ledgers with automated Month-over-Month variance analysis, Financial Health Scores, and AI-driven spending summaries.",
+      "The 50/30/20 framework divides take-home pay into 50% Needs, 30% Wants, and 20% Savings. You can calculate your target allocations using our Free 50/30/20 Budget Calculator and tag your transactions in Expenseliy to monitor your real-time adherence.",
+  },
+  {
+    question: "Can freelancers track 1099 business write-offs in Expenseliy?",
+    answer:
+      "Yes. Freelancers and solopreneurs can tag deductible business expenses (such as software, hardware, coworking, and client travel) and download un-truncated CSV reports formatted for tax time.",
   },
   {
     question: "Is there a free personal expense tracker I can use online?",
@@ -65,14 +76,9 @@ const HOMEPAGE_FAQS: FAQItem[] = [
       "Yes. Expenseliy provides a 100% Free tier that includes 40 lifetime transactions, complete dashboard analytics, custom category management, basic financial health scoring, and full CSV exports with no credit card required.",
   },
   {
-    question: "Can I track income and expenses in the same app?",
+    question: "Can I track income, expenses, and investments in the same app?",
     answer:
-      "Yes. Expenseliy natively tracks both income (salary, freelance retainers, dividends, rental cash flow) and expenses in the same unified ledger, calculating your net cash flow and real-time savings surplus automatically.",
-  },
-  {
-    question: "What is the best way to track household expenses?",
-    answer:
-      "To track household expenses effectively, group your costs into essential fixed utilities (rent/mortgage, electricity, water, internet) and variable living expenses (groceries, home maintenance). Expenseliy allows you to tag household bills with custom labels, monitor category spending trends, and split expenses across multiple household members or projects.",
+      "Yes. Expenseliy natively tracks three asset classes: Income (salaries, freelance invoices, dividends), Expenses (daily spending, household bills), and Investments (stocks, index funds, crypto, real estate).",
   },
   {
     question: "Can Expenseliy track recurring bills and household expenses?",
@@ -83,11 +89,6 @@ const HOMEPAGE_FAQS: FAQItem[] = [
     question: "Can I use Expenseliy instead of an Excel expense tracker?",
     answer:
       "Yes. While Excel and Google Sheets require manual formulas, pivot tables, and mobile formatting workarounds, Expenseliy automates your charts, calculations, category distributions, and health scores right out of the box. Plus, you can export your entire ledger to Excel-compatible CSV anytime.",
-  },
-  {
-    question: "Can I track investments as well as expenses?",
-    answer:
-      "Yes. Expenseliy includes dedicated Investment Tracking for stocks, mutual funds, ETFs, cryptocurrency, precious metals, and real estate, giving you a 360-degree view of your net assets alongside everyday operational cash flow.",
   },
   {
     question: "Does Expenseliy support multiple currencies?",
@@ -131,7 +132,10 @@ export default function HomePage() {
       <section className="bg-canvas border-b border-hairline pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
         <Container size="default">
           <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-income-bg text-income border border-income-border text-xs font-semibold uppercase tracking-wider mb-6 font-mono">
+              <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>40 Free Lifetime Transactions • No Credit Card Required</span>
+            </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink tracking-tight leading-[1.1] mb-6">
               Simple expense tracking for{" "}
@@ -141,12 +145,12 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base sm:text-lg text-ink-secondary leading-relaxed max-w-2xl mb-8">
-              Expenseliy gives individuals and households clear control over income,
-              expenses, investments, and spending patterns with instant analytics and algorithmic
-              insights.
+              Expenseliy gives individuals, freelancers, and households clear control over income,
+              expenses, investments, and spending patterns with instant analytics and zero bank
+              sync friction.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto mb-8">
               <Button
                 href="https://app.expenseliy.com/auth/signin"
                 variant="primary"
@@ -158,17 +162,28 @@ export default function HomePage() {
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Button>
               <Button
-                href="/how-it-works"
+                href="/tools"
                 variant="secondary"
                 size="lg"
                 className="w-full sm:w-auto"
                 id="hero-secondary-cta"
               >
-                <span>See How It Works</span>
+                <span>Explore Free Calculators</span>
               </Button>
             </div>
 
-
+            {/* Trust Pill */}
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-ink-muted">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-primary" /> 5-Second Fast Entry
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-primary" /> Zero Bank Sync Required
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-primary" /> 100% Private Ledger
+              </span>
+            </div>
           </div>
 
           {/* Product Preview Mockup */}
@@ -283,8 +298,110 @@ export default function HomePage() {
         </Container>
       </Section>
 
+      {/* Free Interactive Financial Tools Showcase */}
+      <Section id="tools" variant="default">
+        <Container size="default">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+            <div className="max-w-2xl">
+              <Badge variant="income" size="sm" className="mb-3">
+                <Calculator className="w-3.5 h-3.5 mr-1" />
+                <span>Free Interactive Tools</span>
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-ink tracking-tight mb-2">
+                Plan Your Budget with Free Web Calculators
+              </h2>
+              <p className="text-sm sm:text-base text-ink-secondary leading-relaxed">
+                Test different scenarios with our client-side calculators. Zero signup or email
+                required.
+              </p>
+            </div>
+            <Button href="/tools" variant="secondary" size="md" className="shrink-0">
+              <span>View All Tools</span>
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-6 flex flex-col justify-between transition-colors">
+              <div>
+                <div className="w-10 h-10 rounded-md bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary mb-4 shrink-0">
+                  <PieChart className="w-5 h-5" aria-hidden="true" />
+                </div>
+                <Badge variant="income" size="sm" className="mb-2">
+                  50/30/20 Rule
+                </Badge>
+                <h3 className="text-base font-bold text-ink mb-2">50/30/20 Budget Calculator</h3>
+                <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed mb-4">
+                  Allocate your take-home pay into Needs (50%), Wants (30%), and Savings (20%) with
+                  custom percentage sliders.
+                </p>
+              </div>
+              <Button
+                href="/tools/50-30-20-budget-calculator"
+                variant="outline"
+                size="sm"
+                className="w-full justify-center"
+              >
+                <span>Launch Calculator</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Button>
+            </div>
+
+            <div className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-6 flex flex-col justify-between transition-colors">
+              <div>
+                <div className="w-10 h-10 rounded-md bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary mb-4 shrink-0">
+                  <PiggyBank className="w-5 h-5" aria-hidden="true" />
+                </div>
+                <Badge variant="sky" size="sm" className="mb-2">
+                  Wealth Metric
+                </Badge>
+                <h3 className="text-base font-bold text-ink mb-2">Savings Rate Calculator</h3>
+                <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed mb-4">
+                  Calculate your net savings percentage, emergency runway months, and 5-year
+                  compound investment growth.
+                </p>
+              </div>
+              <Button
+                href="/tools/savings-rate-calculator"
+                variant="outline"
+                size="sm"
+                className="w-full justify-center"
+              >
+                <span>Launch Calculator</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Button>
+            </div>
+
+            <div className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-6 flex flex-col justify-between transition-colors">
+              <div>
+                <div className="w-10 h-10 rounded-md bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary mb-4 shrink-0">
+                  <RefreshCw className="w-5 h-5" aria-hidden="true" />
+                </div>
+                <Badge variant="warning" size="sm" className="mb-2">
+                  Leak Detector
+                </Badge>
+                <h3 className="text-base font-bold text-ink mb-2">Subscription Auditor</h3>
+                <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed mb-4">
+                  Itemize recurring subscriptions, find annual cash leaks, and calculate the 5-year
+                  compound opportunity cost.
+                </p>
+              </div>
+              <Button
+                href="/tools/subscription-cost-calculator"
+                variant="outline"
+                size="sm"
+                className="w-full justify-center"
+              >
+                <span>Launch Calculator</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
       {/* How It Works Section */}
-      <Section id="how-it-works" variant="default">
+      <Section id="how-it-works" variant="surface">
         <Container size="default">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <Badge variant="sky" size="sm" className="mb-3">

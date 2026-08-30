@@ -16,10 +16,22 @@ const FOOTER_COLUMNS = [
     ],
   },
   {
-    title: "Resources",
+    title: "Free Tools",
     links: [
-      { name: "Financial Guide Hub", href: "/guide" },
-
+      { name: "All Financial Tools", href: "/tools" },
+      { name: "50/30/20 Budget Calculator", href: "/tools/50-30-20-budget-calculator" },
+      { name: "Savings Rate Calculator", href: "/tools/savings-rate-calculator" },
+      { name: "Subscription Auditor", href: "/tools/subscription-cost-calculator" },
+    ],
+  },
+  {
+    title: "Guides & Insights",
+    links: [
+      { name: "Knowledge Hub", href: "/guide" },
+      { name: "50/30/20 Budget Rule", href: "/guide/50-30-20-budget-rule" },
+      { name: "Freelancer Tax Write-Offs", href: "/guide/freelancer-expense-tracking" },
+      { name: "Household Bill Tracker", href: "/guide/household-bill-tracker" },
+      { name: "Subscription Audit", href: "/guide/recurring-subscription-audit" },
     ],
   },
   {

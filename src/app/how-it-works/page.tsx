@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/marketing/Container";
 import { Breadcrumbs } from "@/components/marketing/Breadcrumbs";
 import { Badge } from "@/components/marketing/Badge";
@@ -13,6 +14,7 @@ import {
   FileSpreadsheet,
   ArrowRight,
   CheckCircle2,
+  Calculator,
 } from "lucide-react";
 
 export const metadata: Metadata = createPageMetadata({
@@ -180,6 +182,92 @@ export default function HowItWorksPage() {
           </div>
         </Container>
       </div>
+
+      {/* Free Interactive Tools & Guides Section */}
+      <section className="py-14 bg-surface border-t border-hairline">
+        <Container size="default">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <Badge variant="income" size="sm" className="mb-2">
+                <Calculator className="w-3.5 h-3.5 mr-1" />
+                <span>Interactive Calculators & Resources</span>
+              </Badge>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-ink tracking-tight">
+                Plan Your Budget Before You Sign Up
+              </h2>
+              <p className="text-xs sm:text-sm text-ink-secondary mt-1">
+                Explore our free client-side calculators and in-depth financial strategy guides.
+              </p>
+            </div>
+            <Link
+              href="/tools"
+              className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1 shrink-0"
+            >
+              <span>Explore All Tools</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <Link
+              href="/tools/50-30-20-budget-calculator"
+              className="p-5 rounded-md bg-canvas border border-hairline hover:border-hairline-strong transition-colors block group"
+            >
+              <span className="text-[10px] font-mono font-bold uppercase text-income block mb-1">
+                Calculator
+              </span>
+              <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-1">
+                50/30/20 Budget Allocator
+              </h3>
+              <p className="text-xs text-ink-secondary leading-relaxed line-clamp-2 mb-3">
+                Split net pay into Needs, Wants, and Savings with custom percentage sliders.
+              </p>
+              <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
+                <span>Launch Tool</span>
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+
+            <Link
+              href="/tools/savings-rate-calculator"
+              className="p-5 rounded-md bg-canvas border border-hairline hover:border-hairline-strong transition-colors block group"
+            >
+              <span className="text-[10px] font-mono font-bold uppercase text-sky block mb-1">
+                Calculator
+              </span>
+              <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-1">
+                Savings Rate & Runway
+              </h3>
+              <p className="text-xs text-ink-secondary leading-relaxed line-clamp-2 mb-3">
+                Calculate emergency fund duration and 5-year compound growth projections.
+              </p>
+              <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
+                <span>Launch Tool</span>
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+
+            <Link
+              href="/guide/personal-expense-tracker-guide"
+              className="p-5 rounded-md bg-canvas border border-hairline hover:border-hairline-strong transition-colors block group"
+            >
+              <span className="text-[10px] font-mono font-bold uppercase text-primary block mb-1">
+                Pillar Guide
+              </span>
+              <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-1">
+                How to Track Expenses Online
+              </h3>
+              <p className="text-xs text-ink-secondary leading-relaxed line-clamp-2 mb-3">
+                The complete step-by-step setup framework for error-free cash flow tracking.
+              </p>
+              <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
+                <span>Read Guide</span>
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+          </div>
+        </Container>
+      </section>
 
       {/* Bottom CTA */}
       <CTASection

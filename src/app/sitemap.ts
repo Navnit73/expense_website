@@ -39,6 +39,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
+      url: `${baseUrl}/tools`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/50-30-20-budget-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/savings-rate-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
+      url: `${baseUrl}/tools/subscription-cost-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
       url: `${baseUrl}/about`,
       lastModified,
       changeFrequency: "monthly",

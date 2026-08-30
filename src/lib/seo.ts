@@ -40,7 +40,16 @@ export function createPageMetadata({
   publishedTime,
   modifiedTime,
   keywords = [
-    
+    "personal expense tracker",
+    "free expense tracker online",
+    "household bill tracker",
+    "track daily expenses",
+    "freelance expense manager",
+    "50 30 20 budget calculator",
+    "savings rate calculator",
+    "manual expense tracker without bank sync",
+    "privacy focused expense app",
+    "multi asset financial ledger",
   ],
   authors,
 }: MetadataProps): Metadata {
@@ -136,6 +145,8 @@ export function getOrganizationSchema() {
       "Self-Employed Expense Management",
       "Cash Flow Analytics",
       "Investment Portfolio Tracking",
+      "50/30/20 Budgeting Rule",
+      "Savings Rate Optimization",
     ],
     contactPoint: {
       "@type": "ContactPoint",
@@ -200,6 +211,66 @@ export function getSoftwareAppSchema() {
         description: "Unlimited transactions, advanced AI insights, billed annually at $8.25/mo.",
       },
     ],
+  };
+}
+
+export function getWebApplicationSchema({
+  name,
+  description,
+  url,
+  applicationCategory = "FinanceApplication",
+}: {
+  name: string;
+  description: string;
+  url: string;
+  applicationCategory?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name,
+    description,
+    applicationCategory,
+    operatingSystem: "All (Web Browser)",
+    browserRequirements: "Requires JavaScript. Requires HTML5.",
+    url: url.startsWith("http") ? url : `${SITE_CONFIG.url}${url}`,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    creator: {
+      "@type": "Organization",
+      name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
+    },
+  };
+}
+
+export function getHowToSchema({
+  name,
+  description,
+  steps,
+  totalTime = "PT15M",
+}: {
+  name: string;
+  description: string;
+  steps: { name: string; text: string; url?: string }[];
+  totalTime?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name,
+    description,
+    totalTime,
+    step: steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.url && { url: step.url.startsWith("http") ? step.url : `${SITE_CONFIG.url}${step.url}` }),
+    })),
   };
 }
 

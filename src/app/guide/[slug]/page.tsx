@@ -25,6 +25,10 @@ import {
   ListOrdered,
   Sparkles,
   BookOpen,
+  Calculator,
+  PieChart,
+  PiggyBank,
+  RefreshCw,
 } from "lucide-react";
 
 interface GuidePageProps {
@@ -364,6 +368,49 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                     </nav>
                   </div>
 
+                  {/* Free Calculators Widget in Sidebar */}
+                  <div className="pt-4 border-t border-hairline">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-ink mb-3">
+                      <Calculator className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
+                      <span>Free Calculators</span>
+                    </div>
+                    <ul className="space-y-2 text-xs">
+                      <li>
+                        <Link
+                          href="/tools/50-30-20-budget-calculator"
+                          className="flex items-center gap-2 p-2 rounded-md bg-canvas hover:bg-surface-raised border border-hairline hover:border-hairline-strong transition-colors text-ink group"
+                        >
+                          <PieChart className="w-3.5 h-3.5 text-income shrink-0" />
+                          <span className="group-hover:text-primary transition-colors text-[11px] font-medium">
+                            50/30/20 Budget Tool
+                          </span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/tools/savings-rate-calculator"
+                          className="flex items-center gap-2 p-2 rounded-md bg-canvas hover:bg-surface-raised border border-hairline hover:border-hairline-strong transition-colors text-ink group"
+                        >
+                          <PiggyBank className="w-3.5 h-3.5 text-sky shrink-0" />
+                          <span className="group-hover:text-primary transition-colors text-[11px] font-medium">
+                            Savings & Runway Tool
+                          </span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/tools/subscription-cost-calculator"
+                          className="flex items-center gap-2 p-2 rounded-md bg-canvas hover:bg-surface-raised border border-hairline hover:border-hairline-strong transition-colors text-ink group"
+                        >
+                          <RefreshCw className="w-3.5 h-3.5 text-warning shrink-0" />
+                          <span className="group-hover:text-primary transition-colors text-[11px] font-medium">
+                            Subscription Leak Auditor
+                          </span>
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+
                   {/* Sidebar Share */}
                   <div className="pt-4 border-t border-hairline">
                     <GuideShare title={guide.title} url={`/guide/${guide.slug}`} />
@@ -398,6 +445,95 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
                 </div>
               )}
             </aside>
+          </div>
+        </Container>
+      </section>
+
+      {/* Free Interactive Calculators Row */}
+      <section className="py-12 bg-canvas border-t border-hairline">
+        <Container size="default">
+          <div className="flex items-center justify-between gap-4 mb-6">
+            <div>
+              <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-primary mb-1">
+                <Calculator className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>Free Interactive Tools</span>
+              </div>
+              <h2 className="text-lg sm:text-xl font-bold text-ink tracking-tight">
+                Try Our Free Client-Side Calculators
+              </h2>
+            </div>
+            <Link
+              href="/tools"
+              className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1 shrink-0"
+            >
+              <span>All 3 Calculators</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Link
+              href="/tools/50-30-20-budget-calculator"
+              className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-4 flex flex-col justify-between transition-colors group"
+            >
+              <div>
+                <span className="text-[10px] font-mono uppercase text-income font-bold block mb-1">
+                  Budgeting
+                </span>
+                <span className="text-xs font-bold text-ink group-hover:text-primary transition-colors block mb-1">
+                  50/30/20 Budget Calculator
+                </span>
+                <p className="text-[11px] text-ink-secondary line-clamp-2">
+                  Allocate take-home pay into Needs, Wants, and Savings with custom sliders.
+                </p>
+              </div>
+              <span className="text-[11px] font-semibold text-primary inline-flex items-center gap-1 mt-3">
+                <span>Launch Tool</span>
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+
+            <Link
+              href="/tools/savings-rate-calculator"
+              className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-4 flex flex-col justify-between transition-colors group"
+            >
+              <div>
+                <span className="text-[10px] font-mono uppercase text-sky font-bold block mb-1">
+                  Wealth Metric
+                </span>
+                <span className="text-xs font-bold text-ink group-hover:text-primary transition-colors block mb-1">
+                  Savings Rate & Runway Calculator
+                </span>
+                <p className="text-[11px] text-ink-secondary line-clamp-2">
+                  Calculate savings %, emergency runway months, and 5-year investment growth.
+                </p>
+              </div>
+              <span className="text-[11px] font-semibold text-primary inline-flex items-center gap-1 mt-3">
+                <span>Launch Tool</span>
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+
+            <Link
+              href="/tools/subscription-cost-calculator"
+              className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-4 flex flex-col justify-between transition-colors group"
+            >
+              <div>
+                <span className="text-[10px] font-mono uppercase text-warning font-bold block mb-1">
+                  Leak Detector
+                </span>
+                <span className="text-xs font-bold text-ink group-hover:text-primary transition-colors block mb-1">
+                  Subscription Cost Calculator
+                </span>
+                <p className="text-[11px] text-ink-secondary line-clamp-2">
+                  Itemize recurring subscriptions, find annual drain, and calculate opportunity cost.
+                </p>
+              </div>
+              <span className="text-[11px] font-semibold text-primary inline-flex items-center gap-1 mt-3">
+                <span>Launch Tool</span>
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
           </div>
         </Container>
       </section>

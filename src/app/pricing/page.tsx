@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/marketing/Container";
 import { Section } from "@/components/marketing/Section";
 import { Breadcrumbs } from "@/components/marketing/Breadcrumbs";
@@ -8,7 +9,7 @@ import { PricingCard, PricingPlan } from "@/components/marketing/PricingCard";
 import { FAQAccordion, FAQItem } from "@/components/marketing/FAQAccordion";
 import { CTASection } from "@/components/marketing/CTASection";
 import { createPageMetadata, getSoftwareAppSchema, getFAQSchema } from "@/lib/seo";
-import { Check, Minus } from "lucide-react";
+import { Check, Minus, Calculator, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Simple, Transparent Pricing Plans",
@@ -256,6 +257,33 @@ export default function PricingPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Free Tools Callout */}
+      <Section variant="surface">
+        <Container size="default">
+          <div className="bg-canvas border border-hairline rounded-md p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="max-w-xl">
+              <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-primary mb-2">
+                <Calculator className="w-4 h-4" />
+                <span>Looking for Free Client-Side Calculators?</span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-ink mb-1">
+                Explore Our 100% Free Financial Planning Tools
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
+                Test our 50/30/20 Budget Allocator, Savings Rate & Runway Calculator, and Subscription Leak Auditor with zero signup.
+              </p>
+            </div>
+            <Link
+              href="/tools"
+              className="px-4 py-2.5 rounded-md bg-surface border border-hairline hover:border-hairline-strong text-xs font-semibold text-ink hover:text-primary transition-colors inline-flex items-center gap-1.5 shrink-0"
+            >
+              <span>Launch Free Tools Hub</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </Container>
       </Section>

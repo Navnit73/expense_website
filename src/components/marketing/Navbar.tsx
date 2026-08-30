@@ -11,6 +11,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 const NAV_LINKS = [
   { name: "Features", href: "/features" },
+  { name: "Tools", href: "/tools" },
   { name: "How It Works", href: "/how-it-works" },
   { name: "Pricing", href: "/pricing" },
   { name: "Guide", href: "/guide" },

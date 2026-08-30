@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/marketing/Container";
 import { Breadcrumbs } from "@/components/marketing/Breadcrumbs";
 import { Badge } from "@/components/marketing/Badge";
@@ -7,6 +8,8 @@ import { CTASection } from "@/components/marketing/CTASection";
 import { FAQAccordion, FAQItem } from "@/components/marketing/FAQAccordion";
 import { createPageMetadata, getSoftwareAppSchema, getFAQSchema } from "@/lib/seo";
 import {
+  Calculator,
+  PiggyBank,
   Receipt,
   TrendingUp,
   Layers,
@@ -349,6 +352,98 @@ export default function FeaturesPage() {
           </Container>
         ))}
       </div>
+
+      {/* Free Interactive Financial Tools Showcase */}
+      <section className="py-14 bg-canvas border-t border-hairline">
+        <Container size="default">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <Badge variant="income" size="sm" className="mb-2">
+                <Calculator className="w-3.5 h-3.5 mr-1" />
+                <span>Free Interactive Tools</span>
+              </Badge>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-ink tracking-tight">
+                Try Our Free Client-Side Calculators
+              </h2>
+              <p className="text-xs sm:text-sm text-ink-secondary mt-1">
+                Model your 50/30/20 budget, savings runway, and subscription leak metrics with zero signup.
+              </p>
+            </div>
+            <Link
+              href="/tools"
+              className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1 shrink-0"
+            >
+              <span>View All Free Tools</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Link
+              href="/tools/50-30-20-budget-calculator"
+              className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-5 flex flex-col justify-between transition-colors group"
+            >
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase text-income block mb-1">
+                  Budget Allocator
+                </span>
+                <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-2">
+                  50/30/20 Budget Calculator
+                </h3>
+                <p className="text-xs text-ink-secondary leading-relaxed mb-3">
+                  Allocate your net income into Needs (50%), Wants (30%), and Savings (20%) with dynamic sliders.
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
+                <span>Launch Calculator</span>
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+
+            <Link
+              href="/tools/savings-rate-calculator"
+              className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-5 flex flex-col justify-between transition-colors group"
+            >
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase text-sky block mb-1">
+                  Runway Metric
+                </span>
+                <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-2">
+                  Savings Rate & Runway Calculator
+                </h3>
+                <p className="text-xs text-ink-secondary leading-relaxed mb-3">
+                  Calculate savings %, liquid emergency runway duration, and 5-year compound growth projections.
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
+                <span>Launch Calculator</span>
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+
+            <Link
+              href="/tools/subscription-cost-calculator"
+              className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-5 flex flex-col justify-between transition-colors group"
+            >
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase text-warning block mb-1">
+                  Cost Auditor
+                </span>
+                <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-2">
+                  Subscription Cost & Leak Auditor
+                </h3>
+                <p className="text-xs text-ink-secondary leading-relaxed mb-3">
+                  Audit itemized subscriptions, find annual cash leaks, and calculate the 5-year opportunity cost.
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
+                <span>Launch Calculator</span>
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+          </div>
+        </Container>
+      </section>
 
       {/* Frequently Asked Questions Section */}
       <section className="py-16 sm:py-20 lg:py-24 bg-surface border-t border-hairline">
