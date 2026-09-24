@@ -18,10 +18,13 @@ const FOOTER_COLUMNS = [
   {
     title: "Free Tools",
     links: [
-      { name: "All Financial Tools", href: "/tools" },
+      { name: "All Tools & Calculators", href: "/tools" },
+      { name: "Free Invoice Generator", href: "/invoice-generator" },
+      { name: "Instant Bill Maker", href: "/bill-maker" },
+      { name: "Online Receipt Maker", href: "/receipt-maker" },
+      { name: "Free Receipt Scanner", href: "/receipt-scanner" },
+      { name: "Receipt Tracker & Ledger", href: "/receipt-tracker" },
       { name: "50/30/20 Budget Calculator", href: "/tools/50-30-20-budget-calculator" },
-      { name: "Savings Rate Calculator", href: "/tools/savings-rate-calculator" },
-      { name: "Subscription Auditor", href: "/tools/subscription-cost-calculator" },
     ],
   },
   {

@@ -6,22 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: [
-          "/",
-          "/features",
-          "/pricing",
-          "/how-it-works",
-          "/tools",
-          "/tools/*",
-          "/guide",
-          "/guide/*",
-          "/about",
-          "/contact",
-          "/privacy",
-          "/terms",
-          "/cookies",
-          "/refund-policy",
-        ],
+        allow: "/",
         disallow: [
           "/api/",
           "/dashboard/",
@@ -30,7 +15,6 @@ export default function robots(): MetadataRoute.Robots {
           "/login",
           "/signup",
           "/auth/",
-          "/*?*", // Avoid crawling duplicate URLs with tracking parameters
         ],
       },
     ],

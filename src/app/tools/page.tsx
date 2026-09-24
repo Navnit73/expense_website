@@ -17,22 +17,146 @@ import {
   Sparkles,
   ShieldCheck,
   Zap,
+  FileText,
+  Receipt,
+  Hash,
+  CreditCard,
 } from "lucide-react";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Free Online Financial Calculators & Budgeting Tools (2026)",
+  title: "Free Online Financial Calculators, Invoicing & Budgeting Tools (2026)",
   description:
-    "Free, instant personal finance calculators with zero registration. Use our 50/30/20 budget planner, savings rate calculator, and subscription audit tool.",
+    "Free, instant business and personal finance tools with zero registration. Use our free invoice generator, receipt scanner, 50/30/20 budget planner, and bill maker.",
   path: "/tools",
   keywords: [
+    "free invoice generator",
+    "receipt scanner online",
+    "bill maker",
     "free budget calculator",
     "50 30 20 calculator online",
     "savings rate calculator",
     "subscription audit tool",
-    "personal finance calculators",
-    "household budget tools",
+    "invoice number generator",
   ],
 });
+
+const INVOICE_TOOLS_LIST = [
+  {
+    id: "invoice-generator",
+    title: "Free Invoice Generator",
+    badge: "Most Popular",
+    badgeVariant: "income" as const,
+    description:
+      "Create, customize, and download professional PDF invoices in seconds. Includes multi-currency support, tax/discount lines, and custom business branding.",
+    href: "/invoice-generator",
+    icon: FileText,
+    features: [
+      "Client-side instant PDF export",
+      "7 industry invoice templates",
+      "Automatic tax, discount & totals math",
+      "Custom business logo upload",
+    ],
+  },
+  {
+    id: "bill-maker",
+    title: "Instant Bill Maker",
+    badge: "Retail & Service",
+    badgeVariant: "sky" as const,
+    description:
+      "Quickly generate retail bills, service receipts, and point-of-sale invoices. Supports itemized price adjustments and instant printable layouts.",
+    href: "/bill-maker",
+    icon: CreditCard,
+    features: [
+      "Itemized retail & POS layout",
+      "Subtotal, shipping & payment status",
+      "Print and save directly to PDF",
+      "Zero account signup needed",
+    ],
+  },
+  {
+    id: "receipt-maker",
+    title: "Online Receipt Maker",
+    badge: "Receipts",
+    badgeVariant: "warning" as const,
+    description:
+      "Generate clean payment receipts, sales slips, and vendor proofs of purchase with custom payment method tags and tax line items.",
+    href: "/receipt-maker",
+    icon: Receipt,
+    features: [
+      "Thermal slip & modern receipt designs",
+      "Payment method & transaction records",
+      "Instant PDF & browser printing",
+      "100% private client-side generation",
+    ],
+  },
+  {
+    id: "invoice-number-generator",
+    title: "Invoice Number Generator",
+    badge: "Utility",
+    badgeVariant: "income" as const,
+    description:
+      "Generate standardized, sequential invoice reference numbers with custom prefixing, fiscal year codes, and zero padding.",
+    href: "/invoice-number-generator",
+    icon: Hash,
+    features: [
+      "Sequential batch numbering (1-100)",
+      "Fiscal year prefixes (e.g. INV-2026-001)",
+      "1-Click copy and CSV export",
+      "Direct integration with invoice maker",
+    ],
+  },
+];
+
+const RECEIPT_TOOLS_LIST = [
+  {
+    id: "receipt-scanner",
+    title: "Free Receipt Scanner",
+    badge: "OCR Engine",
+    badgeVariant: "income" as const,
+    description:
+      "Scan receipts online with OCR. Extract merchant name, date, subtotal, tax, and total automatically, then download CSV records.",
+    href: "/receipt-scanner",
+    icon: Sparkles,
+    features: [
+      "Client-side OCR text extraction",
+      "Automatic vendor & date detection",
+      "Subtotal, tax & total math balancing",
+      "1-Click sample receipts demo",
+    ],
+  },
+  {
+    id: "receipt-tracker",
+    title: "Receipt Tracker & Ledger",
+    badge: "Ledger",
+    badgeVariant: "sky" as const,
+    description:
+      "Keep all your receipts organized in one place. Track purchases, search by vendor, filter by category, and monitor monthly spending.",
+    href: "/receipt-tracker",
+    icon: Zap,
+    features: [
+      "Receipt timeline, grid & list views",
+      "Category and date range filtering",
+      "Search tags, notes, and amounts",
+      "Duplicate receipt detection alerts",
+    ],
+  },
+  {
+    id: "receipt-scanner-for-taxes",
+    title: "Tax Receipt Scanner",
+    badge: "Tax Ready",
+    badgeVariant: "warning" as const,
+    description:
+      "Scan and organize receipts for tax preparation. Extract amounts, dates, and vendors, and classify Schedule C write-offs.",
+    href: "/receipt-scanner-for-taxes",
+    icon: ShieldCheck,
+    features: [
+      "Schedule C write-off categories",
+      "Multi-year tax folders (2026/2025)",
+      "50% Meals deduction calculations",
+      "Export Tax Summary CSV packages",
+    ],
+  },
+];
 
 const TOOLS_LIST = [
   {
@@ -165,20 +289,94 @@ export default function ToolsIndexPage() {
         </Container>
       </header>
 
-      {/* Tools Grid */}
-      <section className="py-12 sm:py-16 bg-canvas flex-1">
+      {/* Invoice & Billing Suite Grid */}
+      <section className="py-12 bg-surface flex-1 border-b border-hairline">
         <Container size="default">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TOOLS_LIST.map((tool) => {
+          <div className="mb-8">
+            <Badge variant="income" size="sm" className="mb-2">
+              New: Invoicing Suite
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+              Invoice, Bill & Receipt Generator Tools
+            </h2>
+            <p className="text-xs sm:text-sm text-ink-secondary mt-1">
+              Create professional client invoices, retail bills, sales receipts, and sequential invoice numbers with client-side PDF export.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {INVOICE_TOOLS_LIST.map((tool) => {
               const Icon = tool.icon;
               return (
                 <div
                   key={tool.id}
-                  className="bg-surface border border-hairline hover:border-hairline-strong rounded-md p-6 sm:p-8 flex flex-col justify-between transition-colors group"
+                  className="bg-canvas border border-hairline hover:border-hairline-strong rounded-2xl p-6 flex flex-col justify-between transition-all group shadow-sm"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-4">
-                      <div className="w-12 h-12 rounded-md bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary shrink-0">
+                        <Icon className="w-5 h-5" aria-hidden="true" />
+                      </div>
+                      <Badge variant={tool.badgeVariant} size="sm">
+                        {tool.badge}
+                      </Badge>
+                    </div>
+
+                    <h3 className="text-lg font-bold text-ink group-hover:text-primary transition-colors mb-2">
+                      {tool.title}
+                    </h3>
+
+                    <p className="text-xs text-ink-secondary leading-relaxed mb-4">
+                      {tool.description}
+                    </p>
+
+                    <ul className="space-y-1.5 border-t border-hairline pt-3 mb-6">
+                      {tool.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="text-[11px] text-ink-muted flex items-center gap-1.5">
+                          <span className="w-1 h-1 rounded-full bg-primary shrink-0" />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Button href={tool.href} variant="primary" size="sm" className="w-full justify-center">
+                    <span>Open Tool</span>
+                    <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  </Button>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      {/* Receipt OCR Suite Grid */}
+      <section className="py-12 bg-canvas flex-1 border-b border-hairline">
+        <Container size="default">
+          <div className="mb-8">
+            <Badge variant="sky" size="sm" className="mb-2">
+              OCR Engine
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+              Receipt Scanner & Expense Tools
+            </h2>
+            <p className="text-xs sm:text-sm text-ink-secondary mt-1">
+              Extract receipt text, track purchases, organize tax deductions, and download CSV spreadsheets.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {RECEIPT_TOOLS_LIST.map((tool) => {
+              const Icon = tool.icon;
+              return (
+                <div
+                  key={tool.id}
+                  className="bg-surface border border-hairline hover:border-hairline-strong rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all group shadow-sm"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <div className="w-12 h-12 rounded-xl bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary shrink-0">
                         <Icon className="w-6 h-6" aria-hidden="true" />
                       </div>
                       <Badge variant={tool.badgeVariant} size="sm">
@@ -186,9 +384,71 @@ export default function ToolsIndexPage() {
                       </Badge>
                     </div>
 
-                    <h2 className="text-xl font-bold text-ink group-hover:text-primary transition-colors mb-3">
+                    <h3 className="text-xl font-bold text-ink group-hover:text-primary transition-colors mb-3">
                       {tool.title}
-                    </h2>
+                    </h3>
+
+                    <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed mb-6">
+                      {tool.description}
+                    </p>
+
+                    <ul className="space-y-2 border-t border-hairline pt-4 mb-6">
+                      {tool.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="text-xs text-ink-muted flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Button href={tool.href} variant="primary" size="md" className="w-full justify-center">
+                    <span>Open Tool</span>
+                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  </Button>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      {/* Financial Calculators Grid */}
+      <section className="py-12 sm:py-16 bg-canvas flex-1">
+        <Container size="default">
+          <div className="mb-8">
+            <Badge variant="sky" size="sm" className="mb-2">
+              Calculators
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+              Budget & Wealth Calculators
+            </h2>
+            <p className="text-xs sm:text-sm text-ink-secondary mt-1">
+              Calculate percentage allocations, emergency runway, and subscription leakages.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {TOOLS_LIST.map((tool) => {
+              const Icon = tool.icon;
+              return (
+                <div
+                  key={tool.id}
+                  className="bg-surface border border-hairline hover:border-hairline-strong rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all group shadow-sm"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <div className="w-12 h-12 rounded-xl bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary shrink-0">
+                        <Icon className="w-6 h-6" aria-hidden="true" />
+                      </div>
+                      <Badge variant={tool.badgeVariant} size="sm">
+                        {tool.badge}
+                      </Badge>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-ink group-hover:text-primary transition-colors mb-3">
+                      {tool.title}
+                    </h3>
 
                     <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed mb-6">
                       {tool.description}

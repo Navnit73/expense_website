@@ -148,3 +148,30 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--ink-faint);
 }
+
+/* Document Print Styles: Ensure only invoice canvas is printed and website chrome is hidden */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  header,
+  footer,
+  nav,
+  aside,
+  .no-print,
+  [role="tablist"],
+  [aria-label="Invoice Studio Navigation"] {
+    display: none !important;
+  }
+
+  #printable-invoice-document {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}

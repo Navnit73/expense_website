@@ -68,10 +68,6 @@ export function createPageMetadata({
       canonical: canonicalUrl,
       languages: {
         en: canonicalUrl,
-        "en-US": canonicalUrl,
-        "en-GB": canonicalUrl,
-        "en-CA": canonicalUrl,
-        "en-AU": canonicalUrl,
         "x-default": canonicalUrl,
       },
     },

@@ -23,6 +23,8 @@ import {
   Copy,
   Check,
   RotateCcw,
+  Wand2,
+  AlertTriangle,
 } from "lucide-react";
 
 const CALCULATOR_FAQS: FAQItem[] = [
@@ -51,6 +53,23 @@ const CALCULATOR_FAQS: FAQItem[] = [
     answer:
       "Expenseliy lets you log transactions in under 5 seconds with custom tags and automated category distributions, letting you see in real-time whether your monthly spending adheres to your 50/30/20 target.",
   },
+  {
+    question: "What should I do if I have credit card or student loan debt?",
+    answer:
+      "Minimum required payments on any debt count as a Need, since missing them damages your credit and can trigger fees. Extra, above-minimum payments toward paying off debt faster belong in the 20% Savings & Debt category alongside investing.",
+  },
+  {
+    question: "Is the 50/30/20 rule good for irregular or freelance income?",
+    answer:
+      "Yes, with one adjustment: calculate your percentages against your lowest-earning month or a 3-month rolling average rather than your best month, then treat surplus income in higher-earning months as extra Savings & Debt payoff.",
+  },
+];
+
+const PRESETS = [
+  { id: "standard", label: "Standard", needs: 50, wants: 30, savings: 20 },
+  { id: "hcol", label: "High Cost of Living", needs: 60, wants: 20, savings: 20 },
+  { id: "aggressive", label: "Aggressive Saver", needs: 50, wants: 20, savings: 30 },
+  { id: "debtfocus", label: "Debt Payoff Focus", needs: 55, wants: 15, savings: 30 },
 ];
 
 export default function BudgetCalculatorPage() {
@@ -61,6 +80,7 @@ export default function BudgetCalculatorPage() {
   const [wantsPct, setWantsPct] = useState<number>(30);
   const [savingsPct, setSavingsPct] = useState<number>(20);
   const [copied, setCopied] = useState<boolean>(false);
+  const [activePreset, setActivePreset] = useState<string>("standard");
 
   // Normalize to monthly for base calculation
   const monthlyIncome =
@@ -74,12 +94,44 @@ export default function BudgetCalculatorPage() {
   const wantsAmount = (monthlyIncome * wantsPct) / 100;
   const savingsAmount = (monthlyIncome * savingsPct) / 100;
 
+  const total = needsPct + wantsPct + savingsPct;
+  const isBalanced = total === 100;
+
+  const applyPreset = (preset: (typeof PRESETS)[number]) => {
+    setNeedsPct(preset.needs);
+    setWantsPct(preset.wants);
+    setSavingsPct(preset.savings);
+    setActivePreset(preset.id);
+  };
+
   const handleReset = () => {
-    setNeedsPct(50);
-    setWantsPct(30);
-    setSavingsPct(20);
+    applyPreset(PRESETS[0]);
     setIncome(5000);
     setFrequency("monthly");
+  };
+
+  // Rescale all three sliders proportionally so they always sum to exactly 100%
+  const handleAutoBalance = () => {
+    if (total === 0) {
+      applyPreset(PRESETS[0]);
+      return;
+    }
+    const scale = 100 / total;
+    const n = Math.round(needsPct * scale);
+    const w = Math.round(wantsPct * scale);
+    const s = 100 - n - w; // absorb rounding drift in the last category
+    setNeedsPct(n);
+    setWantsPct(w);
+    setSavingsPct(s);
+    setActivePreset("custom");
+  };
+
+  const updateSlider = (
+    setter: React.Dispatch<React.SetStateAction<number>>,
+    value: number
+  ) => {
+    setter(value);
+    setActivePreset("custom");
   };
 
   const handleCopyBreakdown = () => {
@@ -146,9 +198,22 @@ Calculated on Expenseliy (https://www.expenseliy.com/tools/50-30-20-budget-calcu
             </h1>
 
             <p className="text-base sm:text-lg text-ink-secondary leading-relaxed mb-4">
-              Allocate your monthly take-home income across Essential Needs, Discretionary Wants,
-              and Savings/Investments. Adjust ratios to match your lifestyle and cost of living.
+              Enter your take-home pay, pick a starting split (or build your own), and see
+              exactly how much to put toward Needs, Wants, and Savings every month — no
+              spreadsheet required.
             </p>
+
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink-muted">
+              <li className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-income" /> Free, no sign-up
+              </li>
+              <li className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-income" /> Works with any currency
+              </li>
+              <li className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-income" /> Monthly, bi-weekly & annual pay
+              </li>
+            </ul>
           </div>
         </Container>
       </header>
@@ -167,7 +232,7 @@ Calculated on Expenseliy (https://www.expenseliy.com/tools/50-30-20-budget-calcu
                   className="text-xs text-ink-muted hover:text-ink flex items-center gap-1 transition-colors"
                 >
                   <RotateCcw className="w-3 h-3" />
-                  <span>Reset Defaults</span>
+                  <span>Reset</span>
                 </button>
               </div>
 
@@ -205,6 +270,9 @@ Calculated on Expenseliy (https://www.expenseliy.com/tools/50-30-20-budget-calcu
                     placeholder="5000"
                   />
                 </div>
+                <p className="text-[11px] text-ink-muted mt-1.5">
+                  Use your after-tax pay — the amount actually deposited to your bank account.
+                </p>
               </div>
 
               {/* Pay Frequency */}
@@ -234,16 +302,59 @@ Calculated on Expenseliy (https://www.expenseliy.com/tools/50-30-20-budget-calcu
                 </div>
               </div>
 
+              {/* Quick Presets */}
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-ink font-mono mb-2">
+                  Quick Presets
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {PRESETS.map((preset) => (
+                    <button
+                      key={preset.id}
+                      type="button"
+                      onClick={() => applyPreset(preset)}
+                      className={`py-1.5 px-3 text-[11px] font-semibold rounded-full border transition-colors ${
+                        activePreset === preset.id
+                          ? "bg-ink text-white border-ink"
+                          : "bg-canvas border-hairline text-ink-secondary hover:border-hairline-strong"
+                      }`}
+                    >
+                      {preset.label} ({preset.needs}/{preset.wants}/{preset.savings})
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Custom Allocation Sliders */}
               <div className="space-y-4 pt-4 border-t border-hairline">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold uppercase tracking-wider text-ink font-mono">
                     Budget Ratios
                   </span>
-                  <span className="text-xs text-ink-muted">
-                    Total: {needsPct + wantsPct + savingsPct}%
+                  <span
+                    className={`text-xs font-semibold ${
+                      isBalanced ? "text-ink-muted" : "text-warning"
+                    }`}
+                  >
+                    Total: {total}%
                   </span>
                 </div>
+
+                {!isBalanced && (
+                  <div className="flex items-center justify-between gap-3 bg-warning/10 border border-warning/30 rounded-md px-3 py-2">
+                    <span className="text-[11px] text-ink-secondary flex items-center gap-1.5">
+                      <AlertTriangle className="w-3.5 h-3.5 text-warning shrink-0" />
+                      Your ratios don't add up to 100%.
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleAutoBalance}
+                      className="text-[11px] font-semibold text-primary hover:underline flex items-center gap-1 shrink-0"
+                    >
+                      <Wand2 className="w-3 h-3" /> Auto-balance
+                    </button>
+                  </div>
+                )}
 
                 {/* Needs */}
                 <div>
@@ -259,7 +370,8 @@ Calculated on Expenseliy (https://www.expenseliy.com/tools/50-30-20-budget-calcu
                     min="10"
                     max="80"
                     value={needsPct}
-                    onChange={(e) => setNeedsPct(Number(e.target.value))}
+                    onChange={(e) => updateSlider(setNeedsPct, Number(e.target.value))}
+                    aria-label="Needs percentage"
                     className="w-full accent-expense cursor-pointer"
                   />
                 </div>
@@ -278,7 +390,8 @@ Calculated on Expenseliy (https://www.expenseliy.com/tools/50-30-20-budget-calcu
                     min="5"
                     max="60"
                     value={wantsPct}
-                    onChange={(e) => setWantsPct(Number(e.target.value))}
+                    onChange={(e) => updateSlider(setWantsPct, Number(e.target.value))}
+                    aria-label="Wants percentage"
                     className="w-full accent-warning cursor-pointer"
                   />
                 </div>
@@ -297,7 +410,8 @@ Calculated on Expenseliy (https://www.expenseliy.com/tools/50-30-20-budget-calcu
                     min="5"
                     max="60"
                     value={savingsPct}
-                    onChange={(e) => setSavingsPct(Number(e.target.value))}
+                    onChange={(e) => updateSlider(setSavingsPct, Number(e.target.value))}
+                    aria-label="Savings and debt percentage"
                     className="w-full accent-income cursor-pointer"
                   />
                 </div>
@@ -353,17 +467,19 @@ Calculated on Expenseliy (https://www.expenseliy.com/tools/50-30-20-budget-calcu
                 <div className="space-y-2 mb-8">
                   <div className="h-4 w-full rounded-full bg-canvas border border-hairline overflow-hidden flex">
                     <div
-                      style={{ width: `${needsPct}%` }}
+                      style={{ width: `${Math.min(needsPct, 100)}%` }}
                       className="bg-expense transition-all duration-300"
                       title={`Needs: ${needsPct}%`}
                     />
                     <div
-                      style={{ width: `${wantsPct}%` }}
+                      style={{ width: `${Math.min(wantsPct, 100 - needsPct)}%` }}
                       className="bg-warning transition-all duration-300"
                       title={`Wants: ${wantsPct}%`}
                     />
                     <div
-                      style={{ width: `${savingsPct}%` }}
+                      style={{
+                        width: `${Math.max(0, Math.min(savingsPct, 100 - needsPct - wantsPct))}%`,
+                      }}
                       className="bg-income transition-all duration-300"
                       title={`Savings: ${savingsPct}%`}
                     />
@@ -495,6 +611,159 @@ Calculated on Expenseliy (https://www.expenseliy.com/tools/50-30-20-budget-calcu
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Long-Form SEO Content */}
+      <section className="py-14 sm:py-20 bg-surface border-t border-hairline">
+        <Container size="narrow">
+          <div className="max-w-3xl mx-auto">
+            <Badge variant="neutral" size="sm" className="mb-3">
+              Guide
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight mb-6">
+              Understanding the 50/30/20 Budget Rule: A Complete Guide
+            </h2>
+
+            <div className="space-y-5 text-sm sm:text-base text-ink-secondary leading-relaxed">
+              <p>
+                Managing money well doesn't require a finance degree or a complicated
+                spreadsheet — it requires a framework simple enough to actually follow. That's
+                exactly what the 50/30/20 rule offers. Instead of tracking every category down to
+                the last dollar, it groups your entire financial life into three buckets: Needs,
+                Wants, and Savings. Once you know your after-tax income, the calculator above does
+                the arithmetic instantly, but understanding the reasoning behind each number helps
+                you apply the rule intelligently rather than mechanically.
+              </p>
+
+              <h3 className="text-lg font-bold text-ink pt-2">
+                Where the 50/30/20 Rule Came From
+              </h3>
+              <p>
+                The framework was popularized by Senator Elizabeth Warren and her daughter Amelia
+                Warren Tyagi in their book "All Your Worth: The Ultimate Lifetime Money Plan."
+                Their goal wasn't to create another restrictive budgeting system — it was the
+                opposite. They wanted a rule flexible enough that people wouldn't abandon it after
+                a few weeks, while still building in enough structure to prevent overspending and
+                under-saving. Two decades later, it remains one of the most recommended
+                starting points for anyone building their first real budget.
+              </p>
+
+              <h3 className="text-lg font-bold text-ink pt-2">How the Calculation Works</h3>
+              <p>
+                The math itself is straightforward. Take your net income — what actually lands in
+                your bank account after taxes, health insurance premiums, and retirement
+                contributions taken out of your paycheck — and split it three ways: 50% toward
+                Needs, 30% toward Wants, and 20% toward Savings and debt payoff. The calculator
+                above automatically converts bi-weekly or annual pay into a monthly baseline, since
+                thinking in monthly terms makes it far easier to compare against monthly bills like
+                rent and utilities.
+              </p>
+
+              <h3 className="text-lg font-bold text-ink pt-2">
+                Needs: The Non-Negotiable 50%
+              </h3>
+              <p>
+                Needs are the expenses you can't skip without real consequences: housing payments,
+                utilities, groceries, insurance, minimum debt payments, and basic transportation.
+                A helpful test is to ask, "Would I face a serious problem — eviction, a lapsed
+                policy, a damaged credit score — if I stopped paying this?" If the answer is yes,
+                it's a Need. If you could downgrade or cancel it without real harm, it belongs in
+                Wants instead, even if it feels essential day to day.
+              </p>
+
+              <h3 className="text-lg font-bold text-ink pt-2">
+                Wants: The Flexible 30%
+              </h3>
+              <p>
+                Wants cover everything that improves your quality of life but isn't strictly
+                required: dining out, streaming subscriptions, travel, hobbies, and upgraded
+                versions of things you could buy cheaper. This category is intentionally generous
+                — 30% is meant to prevent the burnout that comes from an overly austere budget.
+                Cutting Wants to zero rarely lasts; giving yourself permission to spend on things
+                you enjoy, within a defined limit, is what makes the rule sustainable long-term.
+              </p>
+
+              <h3 className="text-lg font-bold text-ink pt-2">
+                Savings & Debt: The Future-Focused 20%
+              </h3>
+              <p>
+                The final 20% is where your financial security is built: an emergency fund,
+                retirement contributions, index fund investing, and any extra payments beyond the
+                minimum on credit cards, student loans, or other debt. If you're currently carrying
+                high-interest debt, prioritize paying that down aggressively within this bucket
+                before building a large investment portfolio — the guaranteed "return" of avoiding
+                18%+ interest usually beats market returns.
+              </p>
+
+              <h3 className="text-lg font-bold text-ink pt-2">
+                Adjusting the Ratios for Your Situation
+              </h3>
+              <p>
+                The 50/30/20 split is a starting point, not a law of physics. If you live in a
+                high-cost city, housing alone might consume 45% of your income before you've paid
+                for anything else — in that case, a temporary 60/20/20 or even 65/15/20 split is
+                more realistic than forcing an unworkable target. Conversely, high earners or
+                people with unusually low fixed costs often push savings up to 30% or 40%, since
+                the goal of the framework is long-term financial health, not rigid adherence to
+                specific numbers. Use the presets in the calculator above as a faster way to try
+                these common variations before fine-tuning with the sliders.
+              </p>
+
+              <h3 className="text-lg font-bold text-ink pt-2">
+                Applying the Rule Step by Step
+              </h3>
+              <p>
+                Start by calculating your true net monthly income, including any side income you
+                receive regularly. Next, list your actual fixed Needs and compare that total
+                against your 50% target — this single comparison often reveals whether housing or
+                transportation costs are quietly eating into money that should be going toward
+                savings. Then set a realistic Wants budget you can stick to, ideally by moving that
+                amount into a separate account or card at the start of each month. Finally,
+                automate your Savings & Debt category so it's transferred out before you have the
+                chance to spend it — automation is consistently the difference between people who
+                save consistently and people who intend to.
+              </p>
+
+              <h3 className="text-lg font-bold text-ink pt-2">
+                Common Mistakes to Avoid
+              </h3>
+              <p>
+                The most frequent error is budgeting against gross income instead of net, which
+                inflates every category and sets unrealistic expectations. A close second is
+                miscategorizing Wants as Needs — a premium phone plan or a car payment on a vehicle
+                nicer than necessary often masquerades as essential spending when it's really a
+                lifestyle choice. Finally, many people set their percentages once and never revisit
+                them; a raise, a move, or a new dependent should always trigger a quick
+                recalculation.
+              </p>
+
+              <h3 className="text-lg font-bold text-ink pt-2">
+                How It Compares to Other Budgeting Methods
+              </h3>
+              <p>
+                Zero-based budgeting assigns every single dollar a specific job and demands
+                monthly line-item tracking — more precise, but far more time-consuming. The
+                envelope system physically or virtually separates cash into spending categories,
+                which works well for people prone to overspending but can feel restrictive.
+                Pay-yourself-first budgeting focuses purely on automating savings before anything
+                else, without prescribing how the remainder is spent. The 50/30/20 rule sits in the
+                middle: structured enough to build good habits, simple enough that most people
+                actually keep using it after the first month.
+              </p>
+
+              <h3 className="text-lg font-bold text-ink pt-2">Making the Budget Stick</h3>
+              <p>
+                A budget only works if you can see how you're actually doing against it. Once
+                you've settled on your target percentages using the calculator above, the next
+                step is tracking real transactions against those categories throughout the month.
+                Tools like Expenseliy let you log expenses in seconds and automatically tag them
+                as Needs, Wants, or Savings, so you can spot in real time whether you're on pace —
+                rather than discovering a problem when your bank balance runs low at the end of the
+                month.
+              </p>
             </div>
           </div>
         </Container>
