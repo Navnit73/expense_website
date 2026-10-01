@@ -44,11 +44,132 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.95,
     },
+    // Tools Hub & Calculators
+    {
+      url: `${baseUrl}/tools/self-employment-tax-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/mileage-deduction-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/home-office-deduction-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/schedule-c-expense-deductions-finder`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/freelance-hourly-rate-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/invoice-late-fee-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
+      url: `${baseUrl}/tools/estimate-maker`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/purchase-order-generator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
+      url: `${baseUrl}/tools/packing-slip-generator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
+      url: `${baseUrl}/tools/profit-margin-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/break-even-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/cash-burn-runway-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
+      url: `${baseUrl}/tools/dso-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
+      url: `${baseUrl}/tools/per-diem-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
+      url: `${baseUrl}/tools/bank-statement-csv-formatter`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
+      url: `${baseUrl}/tools/sales-tax-vat-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/business-tip-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
     {
       url: `${baseUrl}/tools/50-30-20-budget-calculator`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/tools/emergency-fund-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
+      url: `${baseUrl}/tools/debt-payoff-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
+    },
+    {
+      url: `${baseUrl}/tools/net-worth-calculator`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.90,
     },
     {
       url: `${baseUrl}/tools/savings-rate-calculator`,
@@ -62,6 +183,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.90,
     },
+    // Receipt Suite
     {
       url: `${baseUrl}/receipt-scanner`,
       lastModified,
@@ -122,6 +244,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.90,
     },
+    // Invoicing Suite
     {
       url: `${baseUrl}/invoice-generator`,
       lastModified,

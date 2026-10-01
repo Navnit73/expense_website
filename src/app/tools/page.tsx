@@ -21,216 +21,392 @@ import {
   Receipt,
   Hash,
   CreditCard,
+  Car,
+  Home,
+  Target,
+  Flame,
+  Clock,
+  MapPin,
+  FileSpreadsheet,
+  Percent,
+  Utensils,
+  ShieldAlert,
+  Layers,
+  Package,
 } from "lucide-react";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Free Online Financial Calculators, Invoicing & Budgeting Tools (2026)",
+  title: "Free Online Financial Calculators, Invoicing & Tax Tools (2026)",
   description:
-    "Free, instant business and personal finance tools with zero registration. Use our free invoice generator, receipt scanner, 50/30/20 budget planner, and bill maker.",
+    "Free, instant business and personal finance tools with zero registration. Use our 1099 tax calculator, invoice generator, mileage deduction tool, profit margin planner, and 50/30/20 budget planner.",
   path: "/tools",
   keywords: [
+    "free financial calculators",
+    "1099 tax calculator",
     "free invoice generator",
+    "mileage deduction calculator",
+    "profit margin calculator",
     "receipt scanner online",
-    "bill maker",
-    "free budget calculator",
-    "50 30 20 calculator online",
-    "savings rate calculator",
-    "subscription audit tool",
-    "invoice number generator",
+    "50 30 20 budget calculator",
+    "break even calculator",
+    "reverse vat calculator",
+    "emergency fund calculator",
   ],
 });
 
-const INVOICE_TOOLS_LIST = [
+const TAX_TOOLS = [
+  {
+    id: "self-employment-tax-calculator",
+    title: "1099 Self-Employment Tax Calculator",
+    badge: "Most Popular",
+    badgeVariant: "income" as const,
+    description: "Calculate Social Security (12.4%), Medicare (2.9%), income taxes, and IRS quarterly payment estimates.",
+    href: "/tools/self-employment-tax-calculator",
+    icon: Calculator,
+    features: ["IRS Schedule SE & 1040 model", "Quarterly estimated tax schedule", "State tax rate adjustments", "Take-home pay calculation"],
+  },
+  {
+    id: "mileage-deduction-calculator",
+    title: "IRS Mileage Deduction Calculator",
+    badge: "IRS $0.67/mi",
+    badgeVariant: "sky" as const,
+    description: "Compare standard IRS mileage rates vs actual vehicle expenses for rideshare, sales, and business trips.",
+    href: "/tools/mileage-deduction-calculator",
+    icon: Car,
+    features: ["Standard $0.67/mi business rate", "Actual gas & repairs comparison", "Medical & charitable mileage", "CSV log template export"],
+  },
+  {
+    id: "home-office-deduction-calculator",
+    title: "Home Office Deduction Calculator",
+    badge: "Form 8829",
+    badgeVariant: "income" as const,
+    description: "Compare the IRS simplified $5/sq ft method vs actual housing expenses (rent, utilities, internet).",
+    href: "/tools/home-office-deduction-calculator",
+    icon: Home,
+    features: ["Simplified $5/sq ft vs Actual", "Square footage percentage math", "Utility & rent allocation", "Tax savings estimate"],
+  },
+  {
+    id: "schedule-c-expense-deductions-finder",
+    title: "Schedule C Deduction Lookup",
+    badge: "Tax Directory",
+    badgeVariant: "warning" as const,
+    description: "Search 50+ IRS Schedule C business expense categories, deductibility percentages, and receipt rules.",
+    href: "/tools/schedule-c-expense-deductions-finder",
+    icon: ShieldCheck,
+    features: ["50+ searchable write-off lines", "50% vs 100% deduction tags", "IRS receipt compliance notes", "Interactive write-off estimator"],
+  },
+];
+
+const INVOICE_TOOLS = [
   {
     id: "invoice-generator",
     title: "Free Invoice Generator",
     badge: "Most Popular",
     badgeVariant: "income" as const,
-    description:
-      "Create, customize, and download professional PDF invoices in seconds. Includes multi-currency support, tax/discount lines, and custom business branding.",
+    description: "Create, customize, and download professional PDF invoices in seconds with custom branding.",
     href: "/invoice-generator",
     icon: FileText,
-    features: [
-      "Client-side instant PDF export",
-      "7 industry invoice templates",
-      "Automatic tax, discount & totals math",
-      "Custom business logo upload",
-    ],
+    features: ["Client-side instant PDF export", "7 industry invoice templates", "Automatic tax & discount lines", "Custom business logo upload"],
+  },
+  {
+    id: "estimate-maker",
+    title: "Price Estimate & Quote Maker",
+    badge: "Client Proposals",
+    badgeVariant: "sky" as const,
+    description: "Generate clean project estimates and quotations with expiration validity dates and PDF downloads.",
+    href: "/tools/estimate-maker",
+    icon: FileSpreadsheet,
+    features: ["Validity expiration terms", "Itemized service & rate table", "Instant PDF proposal download", "Convert to invoice ready"],
+  },
+  {
+    id: "freelance-hourly-rate-calculator",
+    title: "Freelance Hourly Rate Calculator",
+    badge: "Pricing Strategy",
+    badgeVariant: "income" as const,
+    description: "Calculate target hourly, day, and monthly rates based on take-home goals, taxes, and overhead.",
+    href: "/tools/freelance-hourly-rate-calculator",
+    icon: Clock,
+    features: ["Target salary reverse calculation", "Non-billable admin time buffer", "Day rate & retainer pricing", "W-2 salary equivalent score"],
+  },
+  {
+    id: "invoice-late-fee-calculator",
+    title: "Invoice Late Fee Calculator",
+    badge: "Overdue Notices",
+    badgeVariant: "warning" as const,
+    description: "Calculate statutory overdue interest (1.5%/mo or APR%) and copy ready-to-send payment demand emails.",
+    href: "/tools/invoice-late-fee-calculator",
+    icon: Zap,
+    features: ["1.5%/mo & APR interest math", "Grace period adjustment", "Daily accrual breakdown", "Ready-to-send email copy"],
+  },
+  {
+    id: "purchase-order-generator",
+    title: "Purchase Order (PO) Generator",
+    badge: "B2B Procurement",
+    badgeVariant: "sky" as const,
+    description: "Create standardized B2B purchase orders with SKU numbers, vendor details, and PDF export.",
+    href: "/tools/purchase-order-generator",
+    icon: FileText,
+    features: ["SKU & line item tracking", "Vendor & Ship-To fields", "Payment terms (Net 30/60)", "Instant PO PDF download"],
+  },
+  {
+    id: "packing-slip-generator",
+    title: "Packing Slip & Delivery Maker",
+    badge: "Fulfillment",
+    badgeVariant: "income" as const,
+    description: "Generate parcel packing slips, shipping notes, and delivery manifests with tracking numbers.",
+    href: "/tools/packing-slip-generator",
+    icon: Package,
+    features: ["Ordered vs shipped qty", "Carrier tracking details", "Thermal & printable layouts", "Instant client-side PDF"],
   },
   {
     id: "bill-maker",
     title: "Instant Bill Maker",
-    badge: "Retail & Service",
+    badge: "Retail & POS",
     badgeVariant: "sky" as const,
-    description:
-      "Quickly generate retail bills, service receipts, and point-of-sale invoices. Supports itemized price adjustments and instant printable layouts.",
+    description: "Quickly generate retail bills, service receipts, and point-of-sale invoices.",
     href: "/bill-maker",
     icon: CreditCard,
-    features: [
-      "Itemized retail & POS layout",
-      "Subtotal, shipping & payment status",
-      "Print and save directly to PDF",
-      "Zero account signup needed",
-    ],
+    features: ["Itemized retail & POS layout", "Subtotal & payment status", "Print and save to PDF", "Zero signup needed"],
   },
   {
     id: "receipt-maker",
     title: "Online Receipt Maker",
     badge: "Receipts",
     badgeVariant: "warning" as const,
-    description:
-      "Generate clean payment receipts, sales slips, and vendor proofs of purchase with custom payment method tags and tax line items.",
+    description: "Generate clean payment receipts, sales slips, and vendor proofs of purchase.",
     href: "/receipt-maker",
     icon: Receipt,
-    features: [
-      "Thermal slip & modern receipt designs",
-      "Payment method & transaction records",
-      "Instant PDF & browser printing",
-      "100% private client-side generation",
-    ],
-  },
-  {
-    id: "invoice-number-generator",
-    title: "Invoice Number Generator",
-    badge: "Utility",
-    badgeVariant: "income" as const,
-    description:
-      "Generate standardized, sequential invoice reference numbers with custom prefixing, fiscal year codes, and zero padding.",
-    href: "/invoice-number-generator",
-    icon: Hash,
-    features: [
-      "Sequential batch numbering (1-100)",
-      "Fiscal year prefixes (e.g. INV-2026-001)",
-      "1-Click copy and CSV export",
-      "Direct integration with invoice maker",
-    ],
+    features: ["Thermal slip & modern designs", "Payment method records", "Instant PDF export", "100% private in browser"],
   },
 ];
 
-const RECEIPT_TOOLS_LIST = [
+const PROFIT_TOOLS = [
+  {
+    id: "profit-margin-calculator",
+    title: "Profit Margin & Markup Calculator",
+    badge: "High Volume",
+    badgeVariant: "income" as const,
+    description: "Convert cost of goods, selling price, gross margin %, and markup % in real time.",
+    href: "/tools/profit-margin-calculator",
+    icon: Percent,
+    features: ["Gross profit & margin %", "Markup on cost calculation", "Multi-currency support", "Margin vs markup matrix"],
+  },
+  {
+    id: "break-even-calculator",
+    title: "Break-Even Point Calculator",
+    badge: "Feasibility",
+    badgeVariant: "sky" as const,
+    description: "Calculate sales units and revenue needed to cover fixed overhead and hit target net profits.",
+    href: "/tools/break-even-calculator",
+    icon: Target,
+    features: ["Unit contribution margin", "Break-even sales volume", "Target profit goal planner", "Fixed vs variable math"],
+  },
+  {
+    id: "cash-burn-runway-calculator",
+    title: "Startup Cash Burn & Runway",
+    badge: "Treasury",
+    badgeVariant: "expense" as const,
+    description: "Forecast monthly gross burn, net cash drain, and months until Zero Cash Date (ZCD).",
+    href: "/tools/cash-burn-runway-calculator",
+    icon: Flame,
+    features: ["Gross vs net monthly burn", "Zero cash date forecast", "Runway health status badge", "Scenario extension planning"],
+  },
+  {
+    id: "dso-calculator",
+    title: "Days Sales Outstanding (DSO)",
+    badge: "Cash Flow",
+    badgeVariant: "sky" as const,
+    description: "Measure how fast your business collects invoice cash and calculate AR turnover ratios.",
+    href: "/tools/dso-calculator",
+    icon: Clock,
+    features: ["DSO collection speed", "AR turnover multiplier", "Industry benchmark score", "Cash acceleration tips"],
+  },
+];
+
+const EXPENSE_UTILITIES = [
   {
     id: "receipt-scanner",
     title: "Free Receipt Scanner",
     badge: "OCR Engine",
     badgeVariant: "income" as const,
-    description:
-      "Scan receipts online with OCR. Extract merchant name, date, subtotal, tax, and total automatically, then download CSV records.",
+    description: "Scan receipts online with OCR. Extract merchant name, date, subtotal, tax, and total automatically.",
     href: "/receipt-scanner",
     icon: Sparkles,
-    features: [
-      "Client-side OCR text extraction",
-      "Automatic vendor & date detection",
-      "Subtotal, tax & total math balancing",
-      "1-Click sample receipts demo",
-    ],
+    features: ["Client-side OCR text extraction", "Vendor & date detection", "Tax & total math balancing", "CSV export download"],
+  },
+  {
+    id: "bank-statement-csv-formatter",
+    title: "Bank Statement CSV Formatter",
+    badge: "Private Utility",
+    badgeVariant: "sky" as const,
+    description: "Paste raw bank transaction text to clean, standardize dates/amounts, and export clean CSVs.",
+    href: "/tools/bank-statement-csv-formatter",
+    icon: FileSpreadsheet,
+    features: ["Client-side local parsing", "Auto date & amount detection", "Accounting ready CSV export", "100% private in browser"],
+  },
+  {
+    id: "sales-tax-vat-calculator",
+    title: "Sales Tax & Reverse VAT Calculator",
+    badge: "Global Tax",
+    badgeVariant: "income" as const,
+    description: "Add sales tax or reverse extract VAT/GST from gross total receipts with global presets.",
+    href: "/tools/sales-tax-vat-calculator",
+    icon: Percent,
+    features: ["Add tax forward mode", "Reverse VAT extract mode", "US, UK, EU, CA, AU presets", "Net vs gross breakdown"],
+  },
+  {
+    id: "per-diem-calculator",
+    title: "Business Per Diem Calculator",
+    badge: "GSA Rates",
+    badgeVariant: "warning" as const,
+    description: "Calculate daily meal allowances, lodging rates, and 50% IRS business meal write-offs.",
+    href: "/tools/per-diem-calculator",
+    icon: MapPin,
+    features: ["GSA destination rates", "75% travel day rule", "50% IRS meal deduction math", "Expense voucher copy"],
+  },
+  {
+    id: "business-tip-calculator",
+    title: "Business Meal Tip Splitter",
+    badge: "Dining",
+    badgeVariant: "sky" as const,
+    description: "Calculate pre-tax tips (15%-25%), split dinner checks among diners, and copy meal receipts.",
+    href: "/tools/business-tip-calculator",
+    icon: Utensils,
+    features: ["Pre-tax tip calculation", "Even split per diner", "Round to nearest dollar", "Copy meal receipt summary"],
   },
   {
     id: "receipt-tracker",
     title: "Receipt Tracker & Ledger",
     badge: "Ledger",
-    badgeVariant: "sky" as const,
-    description:
-      "Keep all your receipts organized in one place. Track purchases, search by vendor, filter by category, and monitor monthly spending.",
+    badgeVariant: "income" as const,
+    description: "Keep all your receipts organized in one place. Track purchases, search by vendor, and filter tags.",
     href: "/receipt-tracker",
     icon: Zap,
-    features: [
-      "Receipt timeline, grid & list views",
-      "Category and date range filtering",
-      "Search tags, notes, and amounts",
-      "Duplicate receipt detection alerts",
-    ],
-  },
-  {
-    id: "receipt-scanner-for-taxes",
-    title: "Tax Receipt Scanner",
-    badge: "Tax Ready",
-    badgeVariant: "warning" as const,
-    description:
-      "Scan and organize receipts for tax preparation. Extract amounts, dates, and vendors, and classify Schedule C write-offs.",
-    href: "/receipt-scanner-for-taxes",
-    icon: ShieldCheck,
-    features: [
-      "Schedule C write-off categories",
-      "Multi-year tax folders (2026/2025)",
-      "50% Meals deduction calculations",
-      "Export Tax Summary CSV packages",
-    ],
+    features: ["Timeline & list views", "Category filtering", "Duplicate detection alerts", "Private client storage"],
   },
 ];
 
-const TOOLS_LIST = [
+const BUDGET_WEALTH_TOOLS = [
   {
     id: "50-30-20-budget-calculator",
     title: "50/30/20 Budget Calculator",
     badge: "Most Popular",
     badgeVariant: "income" as const,
-    description:
-      "Split your take-home income into Needs (50%), Wants (30%), and Savings/Investments (20%). Includes custom percentage sliders and category allocations.",
+    description: "Split your take-home income into Needs (50%), Wants (30%), and Savings/Investments (20%).",
     href: "/tools/50-30-20-budget-calculator",
     icon: PieChart,
-    features: [
-      "Monthly, annual & bi-weekly inputs",
-      "Customizable percentage split",
-      "Itemized category breakdown",
-      "Zero registration required",
-    ],
+    features: ["Monthly & annual inputs", "Customizable percentage sliders", "Category allocations", "Zero registration required"],
+  },
+  {
+    id: "emergency-fund-calculator",
+    title: "Emergency Fund Calculator",
+    badge: "Safety Net",
+    badgeVariant: "income" as const,
+    description: "Calculate your monthly survival baseline and discover your exact 3, 6, and 12-month savings targets.",
+    href: "/tools/emergency-fund-calculator",
+    icon: ShieldAlert,
+    features: ["Essential expense baseline", "3, 6, 12-month runway targets", "Savings gap to goal", "Timeline completion estimate"],
+  },
+  {
+    id: "debt-payoff-calculator",
+    title: "Debt Snowball vs Avalanche Calculator",
+    badge: "Debt Freedom",
+    badgeVariant: "sky" as const,
+    description: "Compare Debt Avalanche (highest APR first) vs Debt Snowball (smallest balance first) payoff schedules.",
+    href: "/tools/debt-payoff-calculator",
+    icon: CreditCard,
+    features: ["Avalanche vs Snowball comparison", "Interest savings calculation", "Debt-free date projection", "Extra monthly payment slider"],
+  },
+  {
+    id: "net-worth-calculator",
+    title: "Net Worth & Balance Sheet",
+    badge: "Balance Sheet",
+    badgeVariant: "income" as const,
+    description: "Track all your cash, investments, real estate, and liabilities to monitor your true wealth trajectory.",
+    href: "/tools/net-worth-calculator",
+    icon: Layers,
+    features: ["Assets vs liabilities ledger", "Liquid net worth calculation", "Debt-to-asset ratio", "Copy balance sheet summary"],
   },
   {
     id: "savings-rate-calculator",
-    title: "Savings Rate & Financial Runway Calculator",
+    title: "Savings Rate & Runway Calculator",
     badge: "Wealth Benchmark",
     badgeVariant: "sky" as const,
-    description:
-      "Calculate your exact monthly savings percentage, annual cash surplus, and months of emergency runway based on your fixed living expenses.",
+    description: "Calculate your monthly savings percentage, annual cash surplus, and months of emergency runway.",
     href: "/tools/savings-rate-calculator",
     icon: PiggyBank,
-    features: [
-      "Savings rate benchmark health score",
-      "Emergency runway duration calculation",
-      "5-Year compound savings forecast",
-      "Actionable recommendations",
-    ],
+    features: ["Savings rate health score", "Emergency runway duration", "5-Year compound forecast", "Actionable recommendations"],
   },
   {
     id: "subscription-cost-calculator",
-    title: "Subscription Cost & Recurring Leak Auditor",
-    badge: "Cost Optimization",
+    title: "Subscription Cost & Leak Auditor",
+    badge: "Cost Control",
     badgeVariant: "warning" as const,
-    description:
-      "Audit your streaming services, software subscriptions, gym dues, and recurring memberships. Calculate annual drain and compound opportunity cost.",
+    description: "Audit streaming services, software subscriptions, and memberships to calculate annual drain.",
     href: "/tools/subscription-cost-calculator",
     icon: RefreshCw,
-    features: [
-      "Multi-subscription aggregator",
-      "Annual & 5-year total drain calculation",
-      "Investment opportunity cost at 8% S&P 500",
-      "Subscription audit checklist",
-    ],
+    features: ["Multi-subscription aggregator", "5-Year opportunity cost", "S&P 500 compound loss math", "Subscription audit checklist"],
   },
 ];
 
 const TOOLS_FAQS: FAQItem[] = [
   {
-    question: "Are these financial calculators completely free to use?",
-    answer:
-      "Yes, 100% free with no account creation, email capture, or payment required. All calculations run client-side in your web browser for complete privacy.",
+    question: "Are these financial tools completely free to use?",
+    answer: "Yes, 100% free with no account creation, email capture, or payment required. All calculations run client-side in your web browser for complete privacy.",
   },
   {
-    question: "How does the 50/30/20 budget calculator work?",
-    answer:
-      "Enter your net (after-tax) take-home pay. The tool automatically allocates 50% toward essential needs (housing, utilities, groceries), 30% toward discretionary wants (dining out, entertainment), and 20% toward savings and debt reduction.",
+    question: "Is my financial data secure when using these tools?",
+    answer: "Yes. Every tool operates 100% client-side inside your browser sandbox. None of your entered financial amounts, tax numbers, or transaction data are ever transmitted to any external server.",
   },
   {
-    question: "What is a healthy savings rate to aim for?",
-    answer:
-      "A standard baseline is 20% of net income. High-savings rate benchmarks (e.g., for early retirement or rapid debt payoff) aim for 30% to 50%+. Use our Savings Rate Calculator to assess your current benchmark score.",
+    question: "Can I export and print results from these tools?",
+    answer: "Yes! Most tools feature 1-Click Copy Breakdown buttons, downloadable CSV logs, and instant printable PDF document generation.",
   },
   {
-    question: "Can I track these budgets automatically in Expenseliy?",
-    answer:
-      "Yes. Once you calculate your target budgets and category distributions, you can log in to Expenseliy and track your real-time expenses against these targets with 40 free lifetime transactions.",
+    question: "Can I track my real-time spending in Expenseliy?",
+    answer: "Yes. You can use Expenseliy's receipt scanner and expense manager to log transactions with AI OCR and track your actual spending against your budget targets.",
   },
 ];
+
+function ToolCard({ tool }: { tool: any }) {
+  const Icon = tool.icon;
+  return (
+    <div className="bg-surface border border-hairline hover:border-hairline-strong rounded-2xl p-6 flex flex-col justify-between transition-all group shadow-sm">
+      <div>
+        <div className="flex items-center justify-between gap-2 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary shrink-0">
+            <Icon className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <Badge variant={tool.badgeVariant} size="sm">
+            {tool.badge}
+          </Badge>
+        </div>
+
+        <h3 className="text-lg font-bold text-ink group-hover:text-primary transition-colors mb-2">
+          {tool.title}
+        </h3>
+
+        <p className="text-xs text-ink-secondary leading-relaxed mb-4">
+          {tool.description}
+        </p>
+
+        <ul className="space-y-1.5 border-t border-hairline pt-3 mb-6">
+          {tool.features.map((feat: string, fIdx: number) => (
+            <li key={fIdx} className="text-[11px] text-ink-muted flex items-center gap-1.5">
+              <span className="w-1 h-1 rounded-full bg-primary shrink-0" />
+              <span>{feat}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <Button href={tool.href} variant="primary" size="sm" className="w-full justify-center">
+        <span>Open Tool</span>
+        <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+      </Button>
+    </div>
+  );
+}
 
 export default function ToolsIndexPage() {
   const breadcrumbSchema = getBreadcrumbSchema([
@@ -241,15 +417,8 @@ export default function ToolsIndexPage() {
 
   return (
     <div className="flex flex-col flex-1">
-      {/* Schema Injection */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Header */}
       <header className="bg-surface border-b border-hairline py-12 sm:py-16">
@@ -259,16 +428,15 @@ export default function ToolsIndexPage() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-income-bg text-income border border-income-border text-xs font-semibold uppercase tracking-wider mb-4 font-mono">
               <Calculator className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Free Financial Web Tools</span>
+              <span>20+ Free Financial Tools (2026)</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink tracking-tight mb-4 leading-tight">
-              Instant, Client-Side Financial Calculators
+              Free Financial Calculators, Invoicing & Tax Tools
             </h1>
 
             <p className="text-base sm:text-lg text-ink-secondary leading-relaxed mb-6">
-              Empower your budgeting, cash flow planning, and cost reduction with our free online
-              calculators. Zero signup required, completely private.
+              Instant, 100% private financial calculators for freelancers, small business owners, and smart budgeters. Zero sign-up required.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-ink-muted">
@@ -278,328 +446,122 @@ export default function ToolsIndexPage() {
               </div>
               <div className="flex items-center gap-1.5">
                 <Zap className="w-4 h-4 text-primary" />
-                <span>Instant Calculations</span>
+                <span>Instant Calculations & PDF Exports</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span>Always Free</span>
+                <span>Always Free & Open</span>
               </div>
             </div>
           </div>
         </Container>
       </header>
 
-      {/* Invoice & Billing Suite Grid */}
-      <section className="py-12 bg-surface flex-1 border-b border-hairline">
+      {/* Cluster 1: Freelancer & Tax Tools */}
+      <section className="py-12 bg-canvas border-b border-hairline">
         <Container size="default">
           <div className="mb-8">
-            <Badge variant="income" size="sm" className="mb-2">
-              New: Invoicing Suite
-            </Badge>
+            <Badge variant="income" size="sm" className="mb-2">Tax Season Ready</Badge>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
-              Invoice, Bill & Receipt Generator Tools
+              Freelancer & Small Business Tax Tools
             </h2>
             <p className="text-xs sm:text-sm text-ink-secondary mt-1">
-              Create professional client invoices, retail bills, sales receipts, and sequential invoice numbers with client-side PDF export.
+              Estimate 1099 quarterly taxes, calculate IRS mileage deductions, and discover Schedule C write-offs.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {INVOICE_TOOLS_LIST.map((tool) => {
-              const Icon = tool.icon;
-              return (
-                <div
-                  key={tool.id}
-                  className="bg-canvas border border-hairline hover:border-hairline-strong rounded-2xl p-6 flex flex-col justify-between transition-all group shadow-sm"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary shrink-0">
-                        <Icon className="w-5 h-5" aria-hidden="true" />
-                      </div>
-                      <Badge variant={tool.badgeVariant} size="sm">
-                        {tool.badge}
-                      </Badge>
-                    </div>
-
-                    <h3 className="text-lg font-bold text-ink group-hover:text-primary transition-colors mb-2">
-                      {tool.title}
-                    </h3>
-
-                    <p className="text-xs text-ink-secondary leading-relaxed mb-4">
-                      {tool.description}
-                    </p>
-
-                    <ul className="space-y-1.5 border-t border-hairline pt-3 mb-6">
-                      {tool.features.map((feat, fIdx) => (
-                        <li key={fIdx} className="text-[11px] text-ink-muted flex items-center gap-1.5">
-                          <span className="w-1 h-1 rounded-full bg-primary shrink-0" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Button href={tool.href} variant="primary" size="sm" className="w-full justify-center">
-                    <span>Open Tool</span>
-                    <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                  </Button>
-                </div>
-              );
-            })}
+            {TAX_TOOLS.map((t) => (
+              <ToolCard key={t.id} tool={t} />
+            ))}
           </div>
         </Container>
       </section>
 
-      {/* Receipt OCR Suite Grid */}
-      <section className="py-12 bg-canvas flex-1 border-b border-hairline">
+      {/* Cluster 2: Invoicing & Billing Suite */}
+      <section className="py-12 bg-surface border-b border-hairline">
         <Container size="default">
           <div className="mb-8">
-            <Badge variant="sky" size="sm" className="mb-2">
-              OCR Engine
-            </Badge>
+            <Badge variant="sky" size="sm" className="mb-2">Billing & Sales</Badge>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
-              Receipt Scanner & Expense Tools
+              Invoicing, Price Estimates & Billing Tools
             </h2>
             <p className="text-xs sm:text-sm text-ink-secondary mt-1">
-              Extract receipt text, track purchases, organize tax deductions, and download CSV spreadsheets.
+              Create client invoices, price quotes, purchase orders, packing slips, and calculate late fees.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {RECEIPT_TOOLS_LIST.map((tool) => {
-              const Icon = tool.icon;
-              return (
-                <div
-                  key={tool.id}
-                  className="bg-surface border border-hairline hover:border-hairline-strong rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all group shadow-sm"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary shrink-0">
-                        <Icon className="w-6 h-6" aria-hidden="true" />
-                      </div>
-                      <Badge variant={tool.badgeVariant} size="sm">
-                        {tool.badge}
-                      </Badge>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-ink group-hover:text-primary transition-colors mb-3">
-                      {tool.title}
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed mb-6">
-                      {tool.description}
-                    </p>
-
-                    <ul className="space-y-2 border-t border-hairline pt-4 mb-6">
-                      {tool.features.map((feat, fIdx) => (
-                        <li key={fIdx} className="text-xs text-ink-muted flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Button href={tool.href} variant="primary" size="md" className="w-full justify-center">
-                    <span>Open Tool</span>
-                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                  </Button>
-                </div>
-              );
-            })}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {INVOICE_TOOLS.map((t) => (
+              <ToolCard key={t.id} tool={t} />
+            ))}
           </div>
         </Container>
       </section>
 
-      {/* Financial Calculators Grid */}
-      <section className="py-12 sm:py-16 bg-canvas flex-1">
+      {/* Cluster 3: Business Profitability & Cash Flow */}
+      <section className="py-12 bg-canvas border-b border-hairline">
         <Container size="default">
           <div className="mb-8">
-            <Badge variant="sky" size="sm" className="mb-2">
-              Calculators
-            </Badge>
+            <Badge variant="income" size="sm" className="mb-2">Profitability & Treasury</Badge>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
-              Budget & Wealth Calculators
+              Business Profitability & Cash Flow Calculators
             </h2>
             <p className="text-xs sm:text-sm text-ink-secondary mt-1">
-              Calculate percentage allocations, emergency runway, and subscription leakages.
+              Calculate profit margins, determine break-even volumes, measure startup runway, and track DSO.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TOOLS_LIST.map((tool) => {
-              const Icon = tool.icon;
-              return (
-                <div
-                  key={tool.id}
-                  className="bg-surface border border-hairline hover:border-hairline-strong rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all group shadow-sm"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-homepage-mintcream dark:bg-surface-raised border border-hairline flex items-center justify-center text-primary shrink-0">
-                        <Icon className="w-6 h-6" aria-hidden="true" />
-                      </div>
-                      <Badge variant={tool.badgeVariant} size="sm">
-                        {tool.badge}
-                      </Badge>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-ink group-hover:text-primary transition-colors mb-3">
-                      {tool.title}
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed mb-6">
-                      {tool.description}
-                    </p>
-
-                    <ul className="space-y-2 border-t border-hairline pt-4 mb-6">
-                      {tool.features.map((feat, fIdx) => (
-                        <li key={fIdx} className="text-xs text-ink-muted flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Button href={tool.href} variant="primary" size="md" className="w-full justify-center">
-                    <span>Open Calculator</span>
-                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                  </Button>
-                </div>
-              );
-            })}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {PROFIT_TOOLS.map((t) => (
+              <ToolCard key={t.id} tool={t} />
+            ))}
           </div>
         </Container>
       </section>
 
-      {/* Popular Guides & Frameworks */}
-      <section className="py-14 bg-surface border-t border-hairline">
+      {/* Cluster 4: Expense & Receipt Utilities */}
+      <section className="py-12 bg-surface border-b border-hairline">
         <Container size="default">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-            <div>
-              <Badge variant="sky" size="sm" className="mb-2">
-                Knowledge Base
-              </Badge>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-ink tracking-tight">
-                Recommended Financial Guides & Frameworks
-              </h2>
-              <p className="text-xs sm:text-sm text-ink-secondary mt-1">
-                Explore in-depth editorial breakdowns to implement what you calculate.
-              </p>
-            </div>
-            <Link
-              href="/guide"
-              className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1 shrink-0"
-            >
-              <span>View All 11 Guides</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+          <div className="mb-8">
+            <Badge variant="warning" size="sm" className="mb-2">Receipts & Data</Badge>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+              Expense, Receipt & Tax Utilities
+            </h2>
+            <p className="text-xs sm:text-sm text-ink-secondary mt-1">
+              Scan receipts with AI OCR, clean bank CSV statements, and reverse-calculate VAT & meal tips.
+            </p>
           </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {EXPENSE_UTILITIES.map((t) => (
+              <ToolCard key={t.id} tool={t} />
+            ))}
+          </div>
+        </Container>
+      </section>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link
-              href="/guide/50-30-20-budget-rule"
-              className="p-5 rounded-md bg-canvas border border-hairline hover:border-hairline-strong transition-colors block group"
-            >
-              <span className="text-[10px] font-mono font-bold uppercase text-income block mb-1">
-                Budgeting
-              </span>
-              <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-2">
-                The 50/30/20 Budget Rule: The Complete Guide
-              </h3>
-              <p className="text-xs text-ink-secondary leading-relaxed line-clamp-2">
-                Learn how to apply percentage budgeting in high-cost cities and buffer irregular income.
-              </p>
-            </Link>
-
-            <Link
-              href="/guide/cash-flow-management-guide"
-              className="p-5 rounded-md bg-canvas border border-hairline hover:border-hairline-strong transition-colors block group"
-            >
-              <span className="text-[10px] font-mono font-bold uppercase text-sky block mb-1">
-                Analytics
-              </span>
-              <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-2">
-                Personal Cash Flow Management & Runway
-              </h3>
-              <p className="text-xs text-ink-secondary leading-relaxed line-clamp-2">
-                Calculate net monthly surplus, determine your burn rate, and build emergency cash reserves.
-              </p>
-            </Link>
-
-            <Link
-              href="/guide/recurring-subscription-audit"
-              className="p-5 rounded-md bg-canvas border border-hairline hover:border-hairline-strong transition-colors block group"
-            >
-              <span className="text-[10px] font-mono font-bold uppercase text-warning block mb-1">
-                Cost Control
-              </span>
-              <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-2">
-                30-Minute Subscription Audit Checklist
-              </h3>
-              <p className="text-xs text-ink-secondary leading-relaxed line-clamp-2">
-                Identify forgotten trials, negotiate recurring bills, and calculate 5-year opportunity costs.
-              </p>
-            </Link>
-
-            <Link
-              href="/guide/expense-categories"
-              className="p-5 rounded-md bg-canvas border border-hairline hover:border-hairline-strong transition-colors block group"
-            >
-              <span className="text-[10px] font-mono font-bold uppercase text-primary block mb-1">
-                Taxonomy
-              </span>
-              <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-2">
-                Standard Expense Categories Chart of Accounts
-              </h3>
-              <p className="text-xs text-ink-secondary leading-relaxed line-clamp-2">
-                Organize personal living costs and business overhead with standardized groupings.
-              </p>
-            </Link>
-
-            <Link
-              href="/guide/household-bill-tracker"
-              className="p-5 rounded-md bg-canvas border border-hairline hover:border-hairline-strong transition-colors block group"
-            >
-              <span className="text-[10px] font-mono font-bold uppercase text-income block mb-1">
-                Household
-              </span>
-              <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-2">
-                Household Bill Tracker System for Couples
-              </h3>
-              <p className="text-xs text-ink-secondary leading-relaxed line-clamp-2">
-                Choose between proportional, 50/50, and pooled frameworks to manage shared bills.
-              </p>
-            </Link>
-
-            <Link
-              href="/guide/freelancer-expense-tracking"
-              className="p-5 rounded-md bg-canvas border border-hairline hover:border-hairline-strong transition-colors block group"
-            >
-              <span className="text-[10px] font-mono font-bold uppercase text-primary block mb-1">
-                Tax Strategy
-              </span>
-              <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors mb-2">
-                Freelance Expense Tracking & 1099 Deductions
-              </h3>
-              <p className="text-xs text-ink-secondary leading-relaxed line-clamp-2">
-                Never miss legitimate write-offs, track client reimbursables, and reserve quarterly taxes.
-              </p>
-            </Link>
+      {/* Cluster 5: Personal Wealth & Budgeting */}
+      <section className="py-12 bg-canvas border-b border-hairline">
+        <Container size="default">
+          <div className="mb-8">
+            <Badge variant="income" size="sm" className="mb-2">Personal Wealth</Badge>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+              Personal Wealth & Budgeting Calculators
+            </h2>
+            <p className="text-xs sm:text-sm text-ink-secondary mt-1">
+              Plan 50/30/20 budgets, build emergency funds, eliminate debt with snowball/avalanche, and track net worth.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {BUDGET_WEALTH_TOOLS.map((t) => (
+              <ToolCard key={t.id} tool={t} />
+            ))}
           </div>
         </Container>
       </section>
 
       {/* FAQs */}
-      <section className="py-14 sm:py-20 bg-canvas border-t border-hairline">
+      <section className="py-14 sm:py-20 bg-surface border-t border-hairline">
         <Container size="narrow">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <Badge variant="neutral" size="sm" className="mb-3">
-              FAQ
-            </Badge>
+            <Badge variant="neutral" size="sm" className="mb-3">FAQ</Badge>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight mb-2">
               Frequently Asked Questions
             </h2>
@@ -607,15 +569,14 @@ export default function ToolsIndexPage() {
               Common questions regarding our free financial calculators and methodologies.
             </p>
           </div>
-
           <FAQAccordion items={TOOLS_FAQS} />
         </Container>
       </section>
 
       {/* Bottom CTA */}
       <CTASection
-        title="Track Your Budget with Real-Time Accuracy in Expenseliy"
-        description="Take your budget numbers and track them seamlessly with automated category charts and 40 free lifetime transactions."
+        title="Automate Your Finances with Expenseliy"
+        description="Take the numbers from these calculators and manage your ongoing expenses, invoices, and receipts effortlessly."
         badgeText="Start Tracking Free"
       />
     </div>
